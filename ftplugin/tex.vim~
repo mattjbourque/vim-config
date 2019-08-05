@@ -1,0 +1,13 @@
+set sw=2
+set iskeyword+=:
+set grepprg=grep\ -nH\ $*
+
+" Folding
+let g:Tex_FoldedSections="chapter,section,%%fakesection,subsection,subsubsection,paragraph"
+let g:Tex_FoldedEnvironments=",frame"
+
+" Until the problems are solved, don't automatically jump to errors.
+let g:Tex_GotoError=0
+
+" Tweaking Macros, Smart Keys, and such
+let g:Tex_SmartKeyDot = 0

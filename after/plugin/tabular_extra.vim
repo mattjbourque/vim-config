@@ -9,7 +9,7 @@ endif
 let s:save_cpo = &cpo
 set cpo&vim
 
-AddTabularPattern! align /&\(=\|\\approx\)/r1c1l0
+AddTabularPattern! align /&\(\\text\)\@!\(=\|\\approx\)*/r1c1l0
 
 AddTabularPipeline! remove_leading_spaces /^ /
       \ map(a:lines, "substitute(v:val, '^ *', '', '')")

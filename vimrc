@@ -159,6 +159,8 @@ augroup vimrcEx
 
     autocmd FileType text setlocal textwidth=79
 
+    autocmd FileType markdown setlocal textwidth=79
+
     autocmd FileType tex  setlocal textwidth=0
     autocmd FileType tex  setlocal wrap
     autocmd FileType tex  setlocal breakindent

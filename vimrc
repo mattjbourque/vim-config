@@ -32,6 +32,7 @@ Plugin 'hotwatermorning/auto-git-diff'
 Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'altercation/vim-colors-solarized'
 Plugin 'moll/vim-bbye'
+Plugin 'freitass/todo.txt-vim'
 
 " Testing a local plugin - make symbolic link in ~/.vim/bundle
 Plugin 'vim-latex', {'pinned': 1}

@@ -219,8 +219,9 @@ nnoremap <leader>cl :let @*=expand("%:p")<CR>
 nnoremap <leader>bc Iscale=4; <Esc>:.!bc -l ~/.config/bc/bc_init<CR>kJA
 inoremap <leader>bc <Esc>Iscale=4; <Esc>:.!bc -l ~/.config/bc/bc_init<CR>kJA
 
-" In Normal mode, <leader>ev opens vimrc for editing
+" Easy opening of standard files
 nnoremap <leader>ev :hide edit $MYVIMRC<CR>
+nnoremap <leader>et :hide edit ~/Dropbox/todo/todo.txt<CR>
 
 command! Wd write|bdelete
 

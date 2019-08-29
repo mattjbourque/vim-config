@@ -79,7 +79,7 @@ set tags=./tags;/
 " Make file completion behave like Bash: http://www.fuzz.dk/software/vim/filename_completion
 set wildmode=longest,list,full
 set wildmenu
-set wildignore+=*.log,*.aux,*.pdf,*.toc
+set wildignore+=*.log,*.aux,*.pdf,*.toc,*.nav,*.snm,*.out
 
 " add my bibtex directory for searching for include files
 set path+=/home/matt/texmf/tex/latex/bibtex/bib

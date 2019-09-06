@@ -142,6 +142,16 @@ endif
 set background=dark
 colorscheme solarized
 
+" Set up terminal colors for solarized dark theme.
+" TODO: How to set this up more flexibly for changing color on the fly from
+" light to dark?
+let g:terminal_ansi_colors = [
+	    \ "#073642", "#dc322f", "#859900", "#b58900", 
+	    \ "#268bd2", "#d33682", "#2aa198", "#eee8d5", 
+	    \ "#cb4b16", "#002b36", "#586e75", "#657b83", 
+	    \ "#839496", "#6c71c4", "#93a1a1", "#fdf6e3"
+	    \]
+
 "" FILETYPE AUTOCOMMANDS
 " TODO: move these to individual ftplugin files
 " Enable file type detection.

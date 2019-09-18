@@ -121,6 +121,9 @@ highlight Pmenu guibg=brown gui=bold
 " allow backspacing over everything in insert mode
 set backspace=indent,eol,start
 
+" formatoptions
+set formatoptions=jcrql
+
 if has("vms")
   set nobackup		" do not keep a backup file, use versions instead
 else
@@ -164,11 +167,6 @@ augroup vimrcEx
     au!
 
     " Set 'textwidth' and tabs and such for various kinds of files
-    autocmd FileType mail setlocal textwidth=72
-    autocmd FileType mail setlocal fo+=aw
-    autocmd FileType mail setlocal nojs
-    autocmd FileType mail setlocal nosmartindent
-
     autocmd FileType text setlocal textwidth=79
 
     autocmd FileType markdown setlocal textwidth=79
@@ -178,7 +176,6 @@ augroup vimrcEx
     autocmd FileType tex  setlocal breakindent
     autocmd FileType tex  setlocal breakindentopt=shift:5,sbr
     "autocmd FileType tex  setlocal showbreak=---------->
-    autocmd FileType tex  setlocal formatoptions=croqn
     autocmd FileType tex  setlocal lbr
     autocmd FileType tex  setlocal autoindent
     autocmd FileType tex  setlocal softtabstop=2

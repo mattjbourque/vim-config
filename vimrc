@@ -280,6 +280,7 @@ let g:Tex_Env_solutionorgrid="\\begin{solutionorgrid}<++>\<CR><+solution+>\<CR>\
 let g:Tex_Env_block="\\begin{block}{<++>}\<CR><++>\<CR>\\end{block}<++>"
 let g:Tex_Env_enumerate="\\begin{enumerate}<++>\<CR>\<CR>\\item<++>\<CR>\<CR>\\end{enumerate}<++>"
 let g:Tex_Env_parts="\\begin{parts}\<CR>\<CR>\\part<++>\<CR>\<CR>\\end{parts}<++>"
+let g:Tex_Env_aligned="$\\begin{aligned}[<+baseline+>]\<CR><+content+>\<CR>\\end{aligned}$<++>"
 
 let g:Tex_Env_axis="\\begin{axis}[\<CR>axis x line = center,\<CR>axis y line = center,\<CR>xmin = <++>, xmax = <++>,\<CR>ymin = <++>, ymax = <++>,\<CR>xtick distance = <++>,\<CR>ytick distance = <++>,\<CR>grid = <+major,both+>,\<CR>xlabel = <++>,\<CR>ylabel = <++>,\<CR>every tick label/.append style={font=\\tiny},\<CR>clip=false<++>\<CR>]\<CR>\<CR><++>\<CR>\<CR>\\end{axis}<++>"
 

@@ -2,3 +2,4 @@ bundle/*
 .netrwhist
 view/*
 *.sw[p,o]
+spell/*

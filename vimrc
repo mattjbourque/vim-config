@@ -36,7 +36,7 @@ Plugin 'moll/vim-bbye'
 Plugin 'freitass/todo.txt-vim'
 
 " Testing a local plugin - make symbolic link in ~/.vim/bundle
-Plugin 'vim-latex', {'pinned': 1}
+" Plugin 'vim-latex', {'pinned': 1}
 
 """ VUNDLE: EXAMPLE
 " The following are examples of different formats supported.
@@ -290,13 +290,13 @@ let g:Tex_Com_only = "\\only<<++>>{<++>}"
 let g:Tex_Com_space = "\\vspace{\\stretch{<++>}}"
 
 "" NVIM-R SETTINGS
-let maplocalleader = ','
-let R_openpdf = 1
-let R_openhtml = 0 " See NVim-R help about getting browser to reload
-let R_applescript = 0
-let R_nvimpager = "no"
-let R_nvimpager = "vertical"
-let R_pdfviewer = "zathura"
+" let maplocalleader = ','
+" let R_openpdf = 1
+" let R_openhtml = 0 " See NVim-R help about getting browser to reload
+" let R_applescript = 0
+" let R_nvimpager = "no"
+" let R_nvimpager = "vertical"
+" let R_pdfviewer = "zathura"
 
 "" MODELINE
 " vim:fdm=expr:fdl=0

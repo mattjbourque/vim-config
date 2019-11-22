@@ -422,7 +422,7 @@ let g:Tex_Com_space = "\\vspace{\\stretch{<++>}}"
 
 "" NVIM-R SETTINGS
 let maplocalleader = ','
-" let R_openpdf=1
+let R_openpdf=1
 let R_openhtml = 0 " See NVim-R help about getting browser to reload
 let R_applescript = 0
 let R_nvimpager = "no"

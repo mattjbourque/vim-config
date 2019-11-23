@@ -229,6 +229,7 @@ inoremap <leader>bc <Esc>Iscale=4; <Esc>:.!bc -l ~/.config/bc/bc_init<CR>kJA
 " Easy opening of standard files
 nnoremap <leader>ev :hide edit $MYVIMRC<CR>
 nnoremap <leader>et :hide edit ~/Dropbox/todo/todo.txt<CR>
+nnoremap <leader>en :hide edit ~/Dropbox/todo/lifenotes.txt<CR>
 
 command! Wd write|bdelete
 

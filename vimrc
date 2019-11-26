@@ -33,10 +33,14 @@ Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'altercation/vim-colors-solarized'
 Plugin 'moll/vim-bbye'
 Plugin 'freitass/todo.txt-vim'
+Plugin 'lervag/vimtex'
+Plugin 'ycm-core/YouCompleteMe'
+
+Plugin 'SirVer/ultisnips'
+Plugin 'honza/vim-snippets'
 
 " Testing a local plugin - make symbolic link in ~/.vim/bundle
 "Plugin 'vim-latex', {'pinned': 1}
-Plugin 'vim-latex/vim-latex'
 
 """ VUNDLE: EXAMPLE
 " The following are examples of different formats supported.
@@ -361,6 +365,7 @@ let g:airline_powerline_fonts=0
 
 let g:airline#extensions#tabline#enabled=1
 let g:airline#extensions#whitespace#enabled=0
+let g:airline#extensions#airlatex#enabled=0
 
 let g:airline#extensions#branch#enabled=1
 
@@ -418,6 +423,17 @@ let R_applescript = 0
 let R_nvimpager = "no"
 let R_nvimpager = "vertical"
 let R_pdfviewer = "zathura"
+ 
+"" UltiSnips settings
+
+" Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
+let g:UltiSnipsExpandTrigger="<c-j>"
+let g:UltiSnipsJumpForwardTrigger="<c-b>"
+let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+
+" If you want :UltiSnipsEdit to split your window.
+let g:UltiSnipsEditSplit="vertical"
+
 
 "" CtrlP settings
 let g:ctrlp_brief_prompt=1

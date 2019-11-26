@@ -70,6 +70,8 @@ call vundle#end()            " required
 
 "" SETTINGS
 
+set modelineexpr " Allow expression options in modelines
+
 " Set the shell for commands within Vim
 set shell=/bin/bash\ --rcfile\ ~/.bashvimrc
 

@@ -149,7 +149,7 @@ set backspace=indent,eol,start
 set formatoptions=jcrql
 
 if has("vms")
-    set nobackup		" do not keep a backup file, use versions instead
+  set nobackup		" do not keep a backup file, use versions instead
 else
     set backup		" keep a backup file
 endif

@@ -232,6 +232,7 @@ inoremap <leader>bc <Esc>Iscale=4; <Esc>:.!bc -l ~/.config/bc/bc_init<CR>kJA
 nnoremap <leader>ev :hide edit $MYVIMRC<CR>
 nnoremap <leader>et :hide edit ~/Dropbox/todo/todo.txt<CR>
 nnoremap <leader>en :hide edit ~/Dropbox/todo/lifenotes.txt<CR>
+nnoremap <leader>exm :hide edit ~/.xmonad/xmonad.hs<CR>
 
 command! Wd write|bdelete
 
@@ -300,6 +301,19 @@ let R_applescript = 0
 let R_nvimpager = "no"
 let R_nvimpager = "vertical"
 let R_pdfviewer = "zathura"
+
+"" CtrlP settings
+let g:ctrlp_brief_prompt=1
+
+let g:ctrlp_working_path_mode = 'rwa'
+let g:ctrlp_root_markers = ['.classroot']
+
+"Mappings 
+nnoremap <c-h> :CtrlP $HOME<CR>
+inoremap <c-h> <C-O>:CtrlP $HOME<CR>
+
+nnoremap <c-c> :CtrlPDir $HOME<CR>
+inoremap <c-c> <C-O>:CtrlPDir $HOME<CR>
 
 "" MODELINE
 " vim:fdm=expr:fdl=0

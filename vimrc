@@ -424,6 +424,10 @@ let R_nvimpager = "no"
 let R_nvimpager = "vertical"
 let R_pdfviewer = "zathura"
  
+"" Vimtex settings
+let g:vimtex_quickfix_autoclose_after_keystrokes=5
+
+
 "" UltiSnips settings
 
 " Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.

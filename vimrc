@@ -168,10 +168,19 @@ let g:terminal_ansi_colors = [
 " Use the default filetype settings, so that mail gets 'tw' set to 72,
 " 'cindent' is on in C files, etc.
 filetype plugin indent on    " required
+    " Setting filetypes
+augroup vimrcSpecialFiletypes
+    au!
+
+    autocmd BufNewFile,BufRead dmenuExtended_preferences.txt set filetype=json
+
+augroup END
+
 
 " Put these in an autocmd group, so that we can delete them easily.
 augroup vimrcEx
     au!
+
 
     " Set 'textwidth' and tabs and such for various kinds of files
     autocmd FileType text setlocal textwidth=79
@@ -300,7 +309,7 @@ let R_openhtml = 0 " See NVim-R help about getting browser to reload
 let R_applescript = 0
 let R_nvimpager = "no"
 let R_nvimpager = "vertical"
-let R_pdfviewer = "zathura"
+" let R_pdfviewer = "zathura"
 
 "" CtrlP settings
 let g:ctrlp_brief_prompt=1

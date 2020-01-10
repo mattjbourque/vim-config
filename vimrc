@@ -229,6 +229,10 @@ augroup END
 
 "" MY MAPPINGS
 
+" Basis for a mapping to use sk to upload current file
+" !sk -c %:p:h:h:t -f %:p:h:t -t % %
+" but trouble: doesn't wait for password input
+
 " <leader>cs copies filename <leader>cl copies path to X clipboard
 nnoremap <leader>cs :let @*=expand("%")<CR>
 nnoremap <leader>cl :let @*=expand("%:p")<CR>

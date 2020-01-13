@@ -3,3 +3,4 @@ bundle/*
 view/*
 *.sw[p,o]
 spell/*
+vimrc.orig

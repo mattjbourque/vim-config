@@ -168,10 +168,19 @@ let g:terminal_ansi_colors = [
 " Use the default filetype settings, so that mail gets 'tw' set to 72,
 " 'cindent' is on in C files, etc.
 filetype plugin indent on    " required
+    " Setting filetypes
+augroup vimrcSpecialFiletypes
+    au!
+
+    autocmd BufNewFile,BufRead dmenuExtended_preferences.txt set filetype=json
+
+augroup END
+
 
 " Put these in an autocmd group, so that we can delete them easily.
 augroup vimrcEx
     au!
+
 
     " Set 'textwidth' and tabs and such for various kinds of files
     autocmd FileType text setlocal textwidth=79
@@ -220,6 +229,10 @@ augroup END
 
 "" MY MAPPINGS
 
+" Basis for a mapping to use sk to upload current file
+" !sk -c %:p:h:h:t -f %:p:h:t -t % %
+" but trouble: doesn't wait for password input
+
 " <leader>cs copies filename <leader>cl copies path to X clipboard
 nnoremap <leader>cs :let @*=expand("%")<CR>
 nnoremap <leader>cl :let @*=expand("%:p")<CR>
@@ -232,6 +245,7 @@ inoremap <leader>bc <Esc>Iscale=4; <Esc>:.!bc -l ~/.config/bc/bc_init<CR>kJA
 nnoremap <leader>ev :hide edit $MYVIMRC<CR>
 nnoremap <leader>et :hide edit ~/Dropbox/todo/todo.txt<CR>
 nnoremap <leader>en :hide edit ~/Dropbox/todo/lifenotes.txt<CR>
+nnoremap <leader>exm :hide edit ~/.xmonad/xmonad.hs<CR>
 
 command! Wd write|bdelete
 
@@ -239,7 +253,7 @@ command! Wd write|bdelete
 "" AIRLINE SETTINGS
 let g:airline_theme='solarized'
 let g:airline_solarized_bg='dark'
-let g:airline_powerline_fonts=1
+let g:airline_powerline_fonts=0
 
 let g:airline#extensions#tabline#enabled=1
 let g:airline#extensions#whitespace#enabled=0
@@ -299,7 +313,20 @@ let R_openhtml = 0 " See NVim-R help about getting browser to reload
 let R_applescript = 0
 let R_nvimpager = "no"
 let R_nvimpager = "vertical"
-let R_pdfviewer = "zathura"
+" let R_pdfviewer = "zathura"
+
+"" CtrlP settings
+let g:ctrlp_brief_prompt=1
+
+let g:ctrlp_working_path_mode = 'rwa'
+let g:ctrlp_root_markers = ['.classroot']
+
+"Mappings 
+nnoremap <c-h> :CtrlP $HOME<CR>
+inoremap <c-h> <C-O>:CtrlP $HOME<CR>
+
+nnoremap <c-c> :CtrlPDir $HOME<CR>
+inoremap <c-c> <C-O>:CtrlPDir $HOME<CR>
 
 "" MODELINE
 " vim:fdm=expr:fdl=0

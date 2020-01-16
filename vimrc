@@ -24,7 +24,7 @@ Plugin 'tpope/vim-repeat'
 Plugin 'vimoutliner/vimoutliner'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes' 
-Plugin 'mattjbourque/airline-latex'
+"Plugin 'mattjbourque/airline-latex'
 Plugin 'edkolev/tmuxline.vim'
 Plugin 'jalvesaq/Nvim-R'
 Plugin 'tpope/vim-fugitive'
@@ -36,7 +36,8 @@ Plugin 'moll/vim-bbye'
 Plugin 'freitass/todo.txt-vim'
 
 " Testing a local plugin - make symbolic link in ~/.vim/bundle
-Plugin 'vim-latex', {'pinned': 1}
+"Plugin 'vim-latex', {'pinned': 1}
+Plugin 'vim-latex/vim-latex'
 
 """ VUNDLE: EXAMPLE
 " The following are examples of different formats supported.
@@ -227,6 +228,18 @@ augroup vimrcEx
 
 augroup END
 
+"" TEMPLATE AUTOCOMMANDS
+augroup Templates
+    au!
+
+    autocmd BufNewFile */118math_*/Quizzes/quiz*/questions.tex 
+		\ 0r ~/.vim/templates/exam_class_preamble.tex 
+		\| $r ~/.vim/templates/118_quiz_header.tex
+		\| $r ~/.vim/templates/questions_wrapper.tex
+		\| set ft=tex
+		\| exe "normal gg"
+
+augroup END
 "" MY MAPPINGS
 
 " Basis for a mapping to use sk to upload current file

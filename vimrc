@@ -229,6 +229,8 @@ augroup vimrcEx
 augroup END
 
 "" TEMPLATE AUTOCOMMANDS
+" TODO: figure out path specification. Currently vim only seems to match paths
+" from home directory, not from, say ~/Teaching/103stat_S20/Classwork
 augroup Templates
     au!
 
@@ -243,6 +245,14 @@ augroup Templates
 		\ 0r ~/.vim/templates/exam_class_preamble.tex 
 		\| $r ~/.vim/templates/knitr_setup.Rnw
 		\| $r ~/.vim/templates/quiz_header.tex
+		\| $r ~/.vim/templates/questions_wrapper.tex
+		\| set ft=rnoweb
+		\| exe "normal gg"
+
+    autocmd BufNewFile */103stat*/Classwork/*/questions.Rnw
+		\ 0r ~/.vim/templates/exam_class_preamble.tex 
+		\| $r ~/.vim/templates/knitr_setup.Rnw
+		\| $r ~/.vim/templates/classwork_header.tex
 		\| $r ~/.vim/templates/questions_wrapper.tex
 		\| set ft=rnoweb
 		\| exe "normal gg"
@@ -350,5 +360,5 @@ nnoremap <c-c> :CtrlPDir $HOME<CR>
 inoremap <c-c> <C-O>:CtrlPDir $HOME<CR>
 
 "" MODELINE
-" vim:fdm=expr:fdl=0
+" vim:fdm=expr
 " vim:fde=getline(v\:lnum)=~'^""'?'>'.(matchend(getline(v\:lnum),'"*')-1)\:'='

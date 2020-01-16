@@ -234,9 +234,17 @@ augroup Templates
 
     autocmd BufNewFile */118math_*/Quizzes/quiz*/questions.tex 
 		\ 0r ~/.vim/templates/exam_class_preamble.tex 
-		\| $r ~/.vim/templates/118_quiz_header.tex
+		\| $r ~/.vim/templates/quiz_header.tex
 		\| $r ~/.vim/templates/questions_wrapper.tex
 		\| set ft=tex
+		\| exe "normal gg"
+
+    autocmd BufNewFile */103stat_*/Quizzes/quiz*/questions.Rnw
+		\ 0r ~/.vim/templates/exam_class_preamble.tex 
+		\| $r ~/.vim/templates/knitr_setup.Rnw
+		\| $r ~/.vim/templates/quiz_header.tex
+		\| $r ~/.vim/templates/questions_wrapper.tex
+		\| set ft=rnoweb
 		\| exe "normal gg"
 
 augroup END

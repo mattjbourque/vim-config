@@ -234,17 +234,32 @@ augroup END
 augroup Templates
     au!
 
-    autocmd BufNewFile */118math_*/Quizzes/quiz*/questions.tex 
+    autocmd BufNewFile */118math_*/Quizzes/*quiz/questions.tex 
 		\ 0r ~/.vim/templates/exam_class_preamble.tex 
 		\| $r ~/.vim/templates/quiz_header.tex
 		\| $r ~/.vim/templates/questions_wrapper.tex
 		\| set ft=tex
 		\| exe "normal gg"
 
-    autocmd BufNewFile */103stat_*/Quizzes/quiz*/questions.Rnw
+    autocmd BufNewFile */103stat_*/Quizzes/*quiz/questions.Rnw
 		\ 0r ~/.vim/templates/exam_class_preamble.tex 
 		\| $r ~/.vim/templates/knitr_setup.Rnw
 		\| $r ~/.vim/templates/quiz_header.tex
+		\| $r ~/.vim/templates/questions_wrapper.tex
+		\| set ft=rnoweb
+		\| exe "normal gg"
+
+    autocmd BufNewFile */118math_*/Quizzes/*practice/questions.tex 
+		\ 0r ~/.vim/templates/exam_class_preamble.tex 
+		\| $r ~/.vim/templates/practice_header.tex
+		\| $r ~/.vim/templates/questions_wrapper.tex
+		\| set ft=tex
+		\| exe "normal gg"
+
+    autocmd BufNewFile */103stat_*/Quizzes/*practice/questions.Rnw
+		\ 0r ~/.vim/templates/exam_class_preamble.tex 
+		\| $r ~/.vim/templates/knitr_setup.Rnw
+		\| $r ~/.vim/templates/practice_header.tex
 		\| $r ~/.vim/templates/questions_wrapper.tex
 		\| set ft=rnoweb
 		\| exe "normal gg"
@@ -277,6 +292,8 @@ nnoremap <leader>ev :hide edit $MYVIMRC<CR>
 nnoremap <leader>et :hide edit ~/Dropbox/todo/todo.txt<CR>
 nnoremap <leader>en :hide edit ~/Dropbox/todo/lifenotes.txt<CR>
 nnoremap <leader>exm :hide edit ~/.xmonad/xmonad.hs<CR>
+
+nnoremap <leader>R :terminal ++close R --vanilla --quiet<CR>
 
 command! Wd write|bdelete
 

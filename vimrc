@@ -82,7 +82,18 @@ set tags=./tags;/
 " Make file completion behave like Bash: http://www.fuzz.dk/software/vim/filename_completion
 set wildmode=longest,list,full
 set wildmenu
-set wildignore+=*.log,*.aux,*.pdf,*.toc,*.nav,*.snm,*.out,*-concordance.tex,*.fls,*.fdb_latexmk,*.synctex.gz,
+set wildignore+=*.log
+	    \,*.aux
+	    \,*.pdf
+	    \,*.toc
+	    \,*.nav
+	    \,*.snm
+	    \,*.out
+	    \,*-concordance.tex
+	    \,*.fls
+	    \,*.fdb_latexmk
+	    \,*.synctex.gz
+	    \,*-tikzDictionary
 
 " add my bibtex directory for searching for include files
 set path+=/home/matt/texmf/tex/latex/bibtex/bib
@@ -132,9 +143,9 @@ set backspace=indent,eol,start
 set formatoptions=jcrql
 
 if has("vms")
-  set nobackup		" do not keep a backup file, use versions instead
+    set nobackup		" do not keep a backup file, use versions instead
 else
-  set backup		" keep a backup file
+    set backup		" keep a backup file
 endif
 
 set history=50		" keep 50 lines of command line history
@@ -146,8 +157,8 @@ set incsearch		" do incremental searching
 " Switch syntax highlighting on, when the terminal has colors
 " Also switch on highlighting the last used search pattern.
 if &t_Co > 2 || has("gui_running")
-  syntax on
-  "  set hlsearch
+    syntax on
+    "  set hlsearch
 endif
 
 set background=dark
@@ -169,7 +180,7 @@ let g:terminal_ansi_colors = [
 " Use the default filetype settings, so that mail gets 'tw' set to 72,
 " 'cindent' is on in C files, etc.
 filetype plugin indent on    " required
-    " Setting filetypes
+" Setting filetypes
 augroup vimrcSpecialFiletypes
     au!
 

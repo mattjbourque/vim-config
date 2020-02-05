@@ -134,7 +134,7 @@ set clipboard=unnamedplus
 
 "Improve visibility of autocomplete popup menu
 "from http://vim.wikia.com/wiki/Omni_completion_popup_menu
-highlight Pmenu guibg=brown gui=bold
+"highlight Pmenu guibg=brown gui=bold
 
 " allow backspacing over everything in insert mode
 set backspace=indent,eol,start

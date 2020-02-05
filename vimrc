@@ -367,12 +367,12 @@ let g:Tex_Com_space = "\\vspace{\\stretch{<++>}}"
 
 "" NVIM-R SETTINGS
 let maplocalleader = ','
-let R_openpdf = 1
+" let R_openpdf = 1
 let R_openhtml = 0 " See NVim-R help about getting browser to reload
 let R_applescript = 0
 let R_nvimpager = "no"
 let R_nvimpager = "vertical"
-" let R_pdfviewer = "zathura"
+let R_pdfviewer = "zathura"
 
 "" CtrlP settings
 let g:ctrlp_brief_prompt=1

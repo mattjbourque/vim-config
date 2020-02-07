@@ -82,7 +82,18 @@ set tags=./tags;/
 " Make file completion behave like Bash: http://www.fuzz.dk/software/vim/filename_completion
 set wildmode=longest,list,full
 set wildmenu
-set wildignore+=*.log,*.aux,*.pdf,*.toc,*.nav,*.snm,*.out,*-concordance.tex,*.fls,*.fdb_latexmk,*.synctex.gz,
+set wildignore+=*.log
+	    \,*.aux
+	    \,*.pdf
+	    \,*.toc
+	    \,*.nav
+	    \,*.snm
+	    \,*.out
+	    \,*-concordance.tex
+	    \,*.fls
+	    \,*.fdb_latexmk
+	    \,*.synctex.gz
+	    \,*-tikzDictionary
 
 " add my bibtex directory for searching for include files
 set path+=/home/matt/texmf/tex/latex/bibtex/bib
@@ -123,7 +134,7 @@ set clipboard=unnamedplus
 
 "Improve visibility of autocomplete popup menu
 "from http://vim.wikia.com/wiki/Omni_completion_popup_menu
-highlight Pmenu guibg=brown gui=bold
+"highlight Pmenu guibg=brown gui=bold
 
 " allow backspacing over everything in insert mode
 set backspace=indent,eol,start
@@ -132,9 +143,9 @@ set backspace=indent,eol,start
 set formatoptions=jcrql
 
 if has("vms")
-  set nobackup		" do not keep a backup file, use versions instead
+    set nobackup		" do not keep a backup file, use versions instead
 else
-  set backup		" keep a backup file
+    set backup		" keep a backup file
 endif
 
 set history=50		" keep 50 lines of command line history
@@ -146,8 +157,8 @@ set incsearch		" do incremental searching
 " Switch syntax highlighting on, when the terminal has colors
 " Also switch on highlighting the last used search pattern.
 if &t_Co > 2 || has("gui_running")
-  syntax on
-  "  set hlsearch
+    syntax on
+    "  set hlsearch
 endif
 
 set background=dark
@@ -169,7 +180,7 @@ let g:terminal_ansi_colors = [
 " Use the default filetype settings, so that mail gets 'tw' set to 72,
 " 'cindent' is on in C files, etc.
 filetype plugin indent on    " required
-    " Setting filetypes
+" Setting filetypes
 augroup vimrcSpecialFiletypes
     au!
 
@@ -259,6 +270,21 @@ augroup Templates
 		\| set ft=rnoweb
 		\| exe "normal gg"
 
+    autocmd BufNewFile */118math_*/Quizzes/*practice/questions.tex 
+		\ 0r ~/.vim/templates/exam_class_preamble.tex 
+		\| $r ~/.vim/templates/practice_header.tex
+		\| $r ~/.vim/templates/questions_wrapper.tex
+		\| set ft=tex
+		\| exe "normal gg"
+
+    autocmd BufNewFile */103stat_*/Quizzes/*practice/questions.Rnw
+		\ 0r ~/.vim/templates/exam_class_preamble.tex 
+		\| $r ~/.vim/templates/knitr_setup.Rnw
+		\| $r ~/.vim/templates/practice_header.tex
+		\| $r ~/.vim/templates/questions_wrapper.tex
+		\| set ft=rnoweb
+		\| exe "normal gg"
+
     autocmd BufNewFile */103stat*/Classwork/*/questions.Rnw
 		\ 0r ~/.vim/templates/exam_class_preamble.tex 
 		\| $r ~/.vim/templates/knitr_setup.Rnw
@@ -303,6 +329,8 @@ nnoremap <leader>ev :hide edit $MYVIMRC<CR>
 nnoremap <leader>et :hide edit ~/Dropbox/todo/todo.txt<CR>
 nnoremap <leader>en :hide edit ~/Dropbox/todo/lifenotes.txt<CR>
 nnoremap <leader>exm :hide edit ~/.xmonad/xmonad.hs<CR>
+
+nnoremap <leader>R :terminal ++close R --vanilla --quiet<CR>
 
 command! Wd write|bdelete
 
@@ -365,12 +393,12 @@ let g:Tex_Com_space = "\\vspace{\\stretch{<++>}}"
 
 "" NVIM-R SETTINGS
 let maplocalleader = ','
-let R_openpdf = 1
+" let R_openpdf = 1
 let R_openhtml = 0 " See NVim-R help about getting browser to reload
 let R_applescript = 0
 let R_nvimpager = "no"
 let R_nvimpager = "vertical"
-" let R_pdfviewer = "zathura"
+let R_pdfviewer = "zathura"
 
 "" CtrlP settings
 let g:ctrlp_brief_prompt=1

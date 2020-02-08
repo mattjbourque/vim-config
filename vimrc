@@ -325,10 +325,12 @@ nnoremap <leader>bc Iscale=4; <Esc>:.!bc -l ~/.config/bc/bc_init<CR>kJA
 inoremap <leader>bc <Esc>Iscale=4; <Esc>:.!bc -l ~/.config/bc/bc_init<CR>kJA
 
 " Easy opening of standard files
-nnoremap <leader>ev :hide edit $MYVIMRC<CR>
-nnoremap <leader>et :hide edit ~/Dropbox/todo/todo.txt<CR>
-nnoremap <leader>en :hide edit ~/Dropbox/todo/lifenotes.txt<CR>
-nnoremap <leader>exm :hide edit ~/.xmonad/xmonad.hs<CR>
+" TODO: don't open a new window if the current one is empty
+nnoremap <leader>ev :new $MYVIMRC<CR>
+nnoremap <leader>et :new ~/Dropbox/todo/todo.txt<CR>
+nnoremap <leader>en :new ~/Dropbox/todo/lifenotes.txt<CR>
+nnoremap <leader>exm :new ~/.xmonad/xmonad.hs<CR>
+nnoremap <leader>eft :execute "new ~/.vim/ftplugin/".&filetype.".vim"<CR>
 
 nnoremap <leader>R :terminal ++close R --vanilla --quiet<CR>
 

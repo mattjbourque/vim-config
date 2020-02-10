@@ -131,7 +131,7 @@ set cpoptions+=n
 set breakindentopt+=sbr
 
 " system clipboard
-set clipboard=unnamedplus
+"set clipboard=unnamedplus
 
 "Improve visibility of autocomplete popup menu
 "from http://vim.wikia.com/wiki/Omni_completion_popup_menu

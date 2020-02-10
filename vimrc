@@ -71,6 +71,7 @@ call vundle#end()            " required
 
 "" SETTINGS
 
+set hidden "Set buffers to hidden when abandoning them
 set modelineexpr " Allow expression options in modelines
 
 " Set the shell for commands within Vim
@@ -130,7 +131,7 @@ set cpoptions+=n
 set breakindentopt+=sbr
 
 " system clipboard
-set clipboard=unnamedplus
+"set clipboard=unnamedplus
 
 "Improve visibility of autocomplete popup menu
 "from http://vim.wikia.com/wiki/Omni_completion_popup_menu
@@ -242,12 +243,22 @@ augroup END
 "" TEMPLATE AUTOCOMMANDS
 " TODO: figure out path specification. Currently vim only seems to match paths
 " from home directory, not from, say ~/Teaching/103stat_S20/Classwork
+" Here is a hint: help says for :p filename modifier "For a filename that does
+" not exist and does not have an absolute path the result is unpredictable."
 augroup Templates
     au!
 
     autocmd BufNewFile */118math_*/Quizzes/*quiz/questions.tex 
 		\ 0r ~/.vim/templates/quiz_worksheet_preamble.tex 
 		\| $r ~/.vim/templates/quiz_header.tex
+		\| $r ~/.vim/templates/questions_wrapper.tex
+		\| set ft=tex
+		\| exe "normal gg"
+
+    autocmd BufNewFile */118math_*/Quizzes/*practice/questions.tex 
+		\ exe "!mkdir -p %:h"
+		\| 0r ~/.vim/templates/exam_class_preamble.tex 
+		\| $r ~/.vim/templates/practice_quiz_header.tex
 		\| $r ~/.vim/templates/questions_wrapper.tex
 		\| set ft=tex
 		\| exe "normal gg"
@@ -298,6 +309,22 @@ augroup Templates
 		\| set ft=rnoweb
 		\| exe "normal gg"
 
+    autocmd BufNewFile */103stat*/Slides/*/slides.Rnw
+		\ 0r ~/.vim/templates/beamer_class_preamble.tex 
+		\| $r ~/.vim/templates/knitr_setup.Rnw
+		\| $r ~/.vim/templates/slides_body.tex
+		\| set ft=rnoweb
+		\| exe "normal gg"
+
+    autocmd BufNewFile */103stat_*/Quizzes/*practice/questions.Rnw 
+		\ 0r ~/.vim/templates/exam_class_preamble.tex 
+		\| $r ~/.vim/templates/knitr_setup.Rnw
+		\| $r ~/.vim/templates/practice_quiz_header.tex
+		\| $r ~/.vim/templates/questions_wrapper.tex
+		\| set ft=rnoweb
+		\| exe "normal gg"
+
+
 augroup END
 "" MY MAPPINGS
 
@@ -314,10 +341,12 @@ nnoremap <leader>bc Iscale=4; <Esc>:.!bc -l ~/.config/bc/bc_init<CR>kJA
 inoremap <leader>bc <Esc>Iscale=4; <Esc>:.!bc -l ~/.config/bc/bc_init<CR>kJA
 
 " Easy opening of standard files
-nnoremap <leader>ev :hide edit $MYVIMRC<CR>
-nnoremap <leader>et :hide edit ~/Dropbox/todo/todo.txt<CR>
-nnoremap <leader>en :hide edit ~/Dropbox/todo/lifenotes.txt<CR>
-nnoremap <leader>exm :hide edit ~/.xmonad/xmonad.hs<CR>
+" TODO: don't open a new window if the current one is empty
+nnoremap <leader>ev :new $MYVIMRC<CR>
+nnoremap <leader>et :new ~/Dropbox/todo/todo.txt<CR>
+nnoremap <leader>en :new ~/Dropbox/todo/lifenotes.txt<CR>
+nnoremap <leader>exm :new ~/.xmonad/xmonad.hs<CR>
+nnoremap <leader>eft :execute "new ~/.vim/ftplugin/".&filetype.".vim"<CR>
 
 nnoremap <leader>R :terminal ++close R --vanilla --quiet<CR>
 

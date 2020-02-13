@@ -71,7 +71,9 @@ call vundle#end()            " required
 "" SETTINGS
 
 set hidden "Set buffers to hidden when abandoning them
+if has('&modelineexpr')
 set modelineexpr " Allow expression options in modelines
+endif
 
 " Set the shell for commands within Vim
 set shell=/bin/bash\ --rcfile\ ~/.bashvimrc

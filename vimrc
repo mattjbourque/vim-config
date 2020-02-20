@@ -71,7 +71,7 @@ call vundle#end()            " required
 "" SETTINGS
 
 set hidden "Set buffers to hidden when abandoning them
-if has('&modelineexpr')
+if exists('+modelineexpr')
 set modelineexpr " Allow expression options in modelines
 endif
 

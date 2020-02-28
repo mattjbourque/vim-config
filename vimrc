@@ -29,7 +29,6 @@ Plugin 'edkolev/tmuxline.vim'
 Plugin 'jalvesaq/Nvim-R'
 Plugin 'tpope/vim-fugitive'
 Plugin 'godlygeek/tabular'
-Plugin 'hotwatermorning/auto-git-diff'
 Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'altercation/vim-colors-solarized'
 Plugin 'moll/vim-bbye'
@@ -72,7 +71,9 @@ call vundle#end()            " required
 "" SETTINGS
 
 set hidden "Set buffers to hidden when abandoning them
+if exists('+modelineexpr')
 set modelineexpr " Allow expression options in modelines
+endif
 
 " Set the shell for commands within Vim
 set shell=/bin/bash\ --rcfile\ ~/.bashvimrc
@@ -249,7 +250,7 @@ augroup Templates
     au!
 
     autocmd BufNewFile */118math_*/Quizzes/*quiz/questions.tex 
-		\ 0r ~/.vim/templates/exam_class_preamble.tex 
+		\ 0r ~/.vim/templates/quiz_worksheet_preamble.tex 
 		\| $r ~/.vim/templates/quiz_header.tex
 		\| $r ~/.vim/templates/questions_wrapper.tex
 		\| set ft=tex
@@ -264,22 +265,37 @@ augroup Templates
 		\| exe "normal gg"
 
     autocmd BufNewFile */103stat_*/Quizzes/*quiz/questions.Rnw
-		\ 0r ~/.vim/templates/exam_class_preamble.tex 
+		\ 0r ~/.vim/templates/quiz_worksheet_preamble.tex 
 		\| $r ~/.vim/templates/knitr_setup.Rnw
 		\| $r ~/.vim/templates/quiz_header.tex
 		\| $r ~/.vim/templates/questions_wrapper.tex
 		\| set ft=rnoweb
 		\| exe "normal gg"
 
+    autocmd BufNewFile */118math_*/Exams/*exam/questions.tex
+		\ 0r ~/.vim/templates/exam_preamble.tex 
+		\| $r ~/.vim/templates/exam_coverpages.tex
+		\| $r ~/.vim/templates/questions_wrapper.tex
+		\| set ft=tex
+		\| exe "normal gg"
+
+    autocmd BufNewFile */103stat_*/Exams/*exam/questions.Rnw
+		\ 0r ~/.vim/templates/exam_preamble.tex 
+		\| $r ~/.vim/templates/knitr_setup.Rnw
+		\| $r ~/.vim/templates/exam_coverpages.tex
+		\| $r ~/.vim/templates/questions_wrapper.tex
+		\| set ft=rnoweb
+		\| exe "normal gg"
+
     autocmd BufNewFile */118math_*/Quizzes/*practice/questions.tex 
-		\ 0r ~/.vim/templates/exam_class_preamble.tex 
+		\ 0r ~/.vim/templates/quiz_worksheet_preamble.tex 
 		\| $r ~/.vim/templates/practice_header.tex
 		\| $r ~/.vim/templates/questions_wrapper.tex
 		\| set ft=tex
 		\| exe "normal gg"
 
     autocmd BufNewFile */103stat_*/Quizzes/*practice/questions.Rnw
-		\ 0r ~/.vim/templates/exam_class_preamble.tex 
+		\ 0r ~/.vim/templates/quiz_worksheet_preamble.tex 
 		\| $r ~/.vim/templates/knitr_setup.Rnw
 		\| $r ~/.vim/templates/practice_header.tex
 		\| $r ~/.vim/templates/questions_wrapper.tex
@@ -287,7 +303,7 @@ augroup Templates
 		\| exe "normal gg"
 
     autocmd BufNewFile */103stat*/Classwork/*/questions.Rnw
-		\ 0r ~/.vim/templates/exam_class_preamble.tex 
+		\ 0r ~/.vim/templates/quiz_worksheet_preamble.tex 
 		\| $r ~/.vim/templates/knitr_setup.Rnw
 		\| $r ~/.vim/templates/classwork_header.tex
 		\| $r ~/.vim/templates/questions_wrapper.tex
@@ -396,7 +412,7 @@ let g:Tex_Com_space = "\\vspace{\\stretch{<++>}}"
 
 "" NVIM-R SETTINGS
 let maplocalleader = ','
-" let R_openpdf = 1
+" let R_openpdf=1
 let R_openhtml = 0 " See NVim-R help about getting browser to reload
 let R_applescript = 0
 let R_nvimpager = "no"

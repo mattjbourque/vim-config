@@ -33,7 +33,6 @@ Plugin 'altercation/vim-colors-solarized'
 Plugin 'moll/vim-bbye'
 Plugin 'freitass/todo.txt-vim'
 Plugin 'lervag/vimtex'
-Plugin 'ycm-core/YouCompleteMe'
 
 Plugin 'SirVer/ultisnips'
 Plugin 'honza/vim-snippets'

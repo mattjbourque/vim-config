@@ -1,5 +1,29 @@
-snippet	sol "exam solution environment"
-\\begin{solution}[${1:\\stretch{1}}]
-	${2:${VISUAL}}
-\\end{solution}
+snippet	"sol?u?t?i?o?n?" "exam solution environment" rb
+\\begin{solution${1:orlines}}[${2:\\stretch{1}}]
+	${3:${VISUAL}}
+\\end{solution${1}}
 endsnippet
+
+snippet "pgfplot" "pgfplot environment with axis" rb
+\\begin{tikzpicture}
+  \\begin{axis}[
+      width = ${1},
+      height = ${2},
+      axis x line = ${3:center},
+      axis y line = ${4:center},
+      xmin = ${5:-5.5}, xmax = ${6:5.5},
+      ymin = -${7:-5.5}, ymax = ${8:5.5}, 
+      xtick distance = ${9:1},
+      xticklabel = ${10:\\empty},
+      ytick distance = ${11:1},
+      yticklabel = ${12:\\empty},
+      grid = ${13:major},
+    ]
+
+    \\addplot[${14:<->}, ${15}] {${15}};	
+
+  \\end{axis}
+\end{tikzpicture}
+endsnippet
+
+

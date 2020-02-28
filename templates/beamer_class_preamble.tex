@@ -1,0 +1,56 @@
+\documentclass[ignorenonframetext]{beamer}
+% Uncomment above for slides
+% Uncomment below for notes
+%\documentclass{article}
+%\usepackage[hyperref,envcountsect]{beamerarticle}
+
+\newcounter{saveenumi}
+\newcommand{\seti}{\setcounter{saveenumi}{\value{enumi}}}
+\newcommand{\conti}{\setcounter{enumi}{\value{saveenumi}}}
+
+\only<slides>{
+  \resetcounteronoverlays{saveenumi}
+}
+
+\setbeamertemplate{navigation symbols}{}
+
+\usepackage{amssymb, amsmath, amsthm}
+\usepackage{graphicx}
+\usepackage{booktabs}
+
+\usepackage{pgfplots}
+\usetikzlibrary{calc}
+\pgfplotsset{width=5cm, compat=1.9}
+
+
+\usetheme{Boadilla}
+\usecolortheme{beaver}
+
+%gets rid of bottom navigation bars
+\setbeamertemplate{footline}[frame number]{}
+
+%gets rid of bottom navigation symbols
+\setbeamertemplate{navigation symbols}{}
+
+%gets rid of footer
+%will override 'frame number' instruction above
+%comment out to revert to previous/default definitions
+\setbeamertemplate{footline}{}
+
+% Insert section titles
+\AtBeginSection[]{
+  \begin{frame}
+    \vfill
+    \centering
+    \begin{beamercolorbox}[
+	sep=8pt,
+	center,
+	shadow=true,
+	rounded=true,
+      ]{title}
+      \usebeamerfont{title}\insertsectionhead\par%
+    \end{beamercolorbox}
+    \vfill
+  \end{frame}
+}
+

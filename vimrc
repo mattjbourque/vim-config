@@ -24,19 +24,22 @@ Plugin 'tpope/vim-repeat'
 Plugin 'vimoutliner/vimoutliner'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes' 
-Plugin 'mattjbourque/airline-latex'
+"Plugin 'mattjbourque/airline-latex'
 Plugin 'edkolev/tmuxline.vim'
 Plugin 'jalvesaq/Nvim-R'
 Plugin 'tpope/vim-fugitive'
 Plugin 'godlygeek/tabular'
-Plugin 'hotwatermorning/auto-git-diff'
 Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'altercation/vim-colors-solarized'
 Plugin 'moll/vim-bbye'
 Plugin 'freitass/todo.txt-vim'
+Plugin 'lervag/vimtex'
+
+Plugin 'SirVer/ultisnips'
+Plugin 'honza/vim-snippets'
 
 " Testing a local plugin - make symbolic link in ~/.vim/bundle
-" Plugin 'vim-latex', {'pinned': 1}
+"Plugin 'vim-latex', {'pinned': 1}
 
 """ VUNDLE: EXAMPLE
 " The following are examples of different formats supported.
@@ -70,6 +73,11 @@ call vundle#end()            " required
 
 "" SETTINGS
 
+set hidden "Set buffers to hidden when abandoning them
+if exists('+modelineexpr')
+set modelineexpr " Allow expression options in modelines
+endif
+
 " Set the shell for commands within Vim
 set shell=/bin/bash\ --rcfile\ ~/.bashvimrc
 
@@ -79,7 +87,18 @@ set tags=./tags;/
 " Make file completion behave like Bash: http://www.fuzz.dk/software/vim/filename_completion
 set wildmode=longest,list,full
 set wildmenu
-set wildignore+=*.log,*.aux,*.pdf,*.toc,*.nav,*.snm,*.out,*-concordance.tex,*.fls,*.fdb_latexmk,*.synctex.gz,
+set wildignore+=*.log
+	    \,*.aux
+	    \,*.pdf
+	    \,*.toc
+	    \,*.nav
+	    \,*.snm
+	    \,*.out
+	    \,*-concordance.tex
+	    \,*.fls
+	    \,*.fdb_latexmk
+	    \,*.synctex.gz
+	    \,*-tikzDictionary
 
 " add my bibtex directory for searching for include files
 set path+=/home/matt/texmf/tex/latex/bibtex/bib
@@ -116,11 +135,11 @@ set cpoptions+=n
 set breakindentopt+=sbr
 
 " system clipboard
-set clipboard=unnamedplus
+"set clipboard=unnamedplus
 
 "Improve visibility of autocomplete popup menu
 "from http://vim.wikia.com/wiki/Omni_completion_popup_menu
-highlight Pmenu guibg=brown gui=bold
+"highlight Pmenu guibg=brown gui=bold
 
 " allow backspacing over everything in insert mode
 set backspace=indent,eol,start
@@ -131,7 +150,7 @@ set formatoptions=jcrql
 if has("vms")
   set nobackup		" do not keep a backup file, use versions instead
 else
-  set backup		" keep a backup file
+    set backup		" keep a backup file
 endif
 
 set history=50		" keep 50 lines of command line history
@@ -143,8 +162,8 @@ set incsearch		" do incremental searching
 " Switch syntax highlighting on, when the terminal has colors
 " Also switch on highlighting the last used search pattern.
 if &t_Co > 2 || has("gui_running")
-  syntax on
-  "  set hlsearch
+    syntax on
+    "  set hlsearch
 endif
 
 set background=dark
@@ -166,10 +185,19 @@ let g:terminal_ansi_colors = [
 " Use the default filetype settings, so that mail gets 'tw' set to 72,
 " 'cindent' is on in C files, etc.
 filetype plugin indent on    " required
+" Setting filetypes
+augroup vimrcSpecialFiletypes
+    au!
+
+    autocmd BufNewFile,BufRead dmenuExtended_preferences.txt set filetype=json
+
+augroup END
+
 
 " Put these in an autocmd group, so that we can delete them easily.
 augroup vimrcEx
     au!
+
 
     " Set 'textwidth' and tabs and such for various kinds of files
     autocmd FileType text setlocal textwidth=79
@@ -216,7 +244,97 @@ augroup vimrcEx
 
 augroup END
 
+"" TEMPLATE AUTOCOMMANDS
+" TODO: figure out path specification. Currently vim only seems to match paths
+" from home directory, not from, say ~/Teaching/103stat_S20/Classwork
+" Here is a hint: help says for :p filename modifier "For a filename that does
+" not exist and does not have an absolute path the result is unpredictable."
+augroup Templates
+    au!
+
+    autocmd BufNewFile */118math_*/Quizzes/*quiz/questions.tex 
+		\ 0r ~/.vim/templates/quiz_worksheet_preamble.tex 
+		\| $r ~/.vim/templates/quiz_header.tex
+		\| $r ~/.vim/templates/questions_wrapper.tex
+		\| set ft=tex
+		\| exe "normal gg"
+
+    autocmd BufNewFile */118math_*/Quizzes/*practice/questions.tex 
+		\ exe "!mkdir -p %:h"
+		\| 0r ~/.vim/templates/exam_class_preamble.tex 
+		\| $r ~/.vim/templates/practice_quiz_header.tex
+		\| $r ~/.vim/templates/questions_wrapper.tex
+		\| set ft=tex
+		\| exe "normal gg"
+
+    autocmd BufNewFile */103stat_*/Quizzes/*quiz/questions.Rnw
+		\ 0r ~/.vim/templates/quiz_worksheet_preamble.tex 
+		\| $r ~/.vim/templates/knitr_setup.Rnw
+		\| $r ~/.vim/templates/quiz_header.tex
+		\| $r ~/.vim/templates/questions_wrapper.tex
+		\| set ft=rnoweb
+		\| exe "normal gg"
+
+    autocmd BufNewFile */118math_*/Exams/*exam/questions.tex
+		\ 0r ~/.vim/templates/exam_preamble.tex 
+		\| $r ~/.vim/templates/exam_coverpages.tex
+		\| $r ~/.vim/templates/questions_wrapper.tex
+		\| set ft=tex
+		\| exe "normal gg"
+
+    autocmd BufNewFile */103stat_*/Exams/*exam/questions.Rnw
+		\ 0r ~/.vim/templates/exam_preamble.tex 
+		\| $r ~/.vim/templates/knitr_setup.Rnw
+		\| $r ~/.vim/templates/exam_coverpages.tex
+		\| $r ~/.vim/templates/questions_wrapper.tex
+		\| set ft=rnoweb
+		\| exe "normal gg"
+
+    autocmd BufNewFile */118math_*/Quizzes/*practice/questions.tex 
+		\ 0r ~/.vim/templates/quiz_worksheet_preamble.tex 
+		\| $r ~/.vim/templates/practice_header.tex
+		\| $r ~/.vim/templates/questions_wrapper.tex
+		\| set ft=tex
+		\| exe "normal gg"
+
+    autocmd BufNewFile */103stat_*/Quizzes/*practice/questions.Rnw
+		\ 0r ~/.vim/templates/quiz_worksheet_preamble.tex 
+		\| $r ~/.vim/templates/knitr_setup.Rnw
+		\| $r ~/.vim/templates/practice_header.tex
+		\| $r ~/.vim/templates/questions_wrapper.tex
+		\| set ft=rnoweb
+		\| exe "normal gg"
+
+    autocmd BufNewFile */103stat*/Classwork/*/questions.Rnw
+		\ 0r ~/.vim/templates/quiz_worksheet_preamble.tex 
+		\| $r ~/.vim/templates/knitr_setup.Rnw
+		\| $r ~/.vim/templates/classwork_header.tex
+		\| $r ~/.vim/templates/questions_wrapper.tex
+		\| set ft=rnoweb
+		\| exe "normal gg"
+
+    autocmd BufNewFile */103stat*/Slides/*/slides.Rnw
+		\ 0r ~/.vim/templates/beamer_class_preamble.tex 
+		\| $r ~/.vim/templates/knitr_setup.Rnw
+		\| $r ~/.vim/templates/slides_body.tex
+		\| set ft=rnoweb
+		\| exe "normal gg"
+
+    autocmd BufNewFile */103stat_*/Quizzes/*practice/questions.Rnw 
+		\ 0r ~/.vim/templates/exam_class_preamble.tex 
+		\| $r ~/.vim/templates/knitr_setup.Rnw
+		\| $r ~/.vim/templates/practice_quiz_header.tex
+		\| $r ~/.vim/templates/questions_wrapper.tex
+		\| set ft=rnoweb
+		\| exe "normal gg"
+
+
+augroup END
 "" MY MAPPINGS
+
+" Basis for a mapping to use sk to upload current file
+" !sk -c %:p:h:h:t -f %:p:h:t -t % %
+" but trouble: doesn't wait for password input
 
 " <leader>cs copies filename <leader>cl copies path to X clipboard
 nnoremap <leader>cs :let @*=expand("%")<CR>
@@ -227,8 +345,14 @@ nnoremap <leader>bc Iscale=4; <Esc>:.!bc -l ~/.config/bc/bc_init<CR>kJA
 inoremap <leader>bc <Esc>Iscale=4; <Esc>:.!bc -l ~/.config/bc/bc_init<CR>kJA
 
 " Easy opening of standard files
-nnoremap <leader>ev :hide edit $MYVIMRC<CR>
-nnoremap <leader>et :hide edit ~/Dropbox/todo/todo.txt<CR>
+" TODO: don't open a new window if the current one is empty
+nnoremap <leader>ev :new $MYVIMRC<CR>
+nnoremap <leader>et :new ~/Dropbox/todo/todo.txt<CR>
+nnoremap <leader>en :new ~/Dropbox/todo/lifenotes.txt<CR>
+nnoremap <leader>exm :new ~/.xmonad/xmonad.hs<CR>
+nnoremap <leader>eft :execute "new ~/.vim/ftplugin/".&filetype.".vim"<CR>
+
+nnoremap <leader>R :terminal ++close R --vanilla --quiet<CR>
 
 command! Wd write|bdelete
 
@@ -236,10 +360,11 @@ command! Wd write|bdelete
 "" AIRLINE SETTINGS
 let g:airline_theme='solarized'
 let g:airline_solarized_bg='dark'
-let g:airline_powerline_fonts=1
+let g:airline_powerline_fonts=0
 
 let g:airline#extensions#tabline#enabled=1
 let g:airline#extensions#whitespace#enabled=0
+let g:airline#extensions#airlatex#enabled=0
 
 let g:airline#extensions#branch#enabled=1
 
@@ -290,14 +415,42 @@ let g:Tex_Com_only = "\\only<<++>>{<++>}"
 let g:Tex_Com_space = "\\vspace{\\stretch{<++>}}"
 
 "" NVIM-R SETTINGS
-" let maplocalleader = ','
-" let R_openpdf = 1
-" let R_openhtml = 0 " See NVim-R help about getting browser to reload
-" let R_applescript = 0
-" let R_nvimpager = "no"
-" let R_nvimpager = "vertical"
-" let R_pdfviewer = "zathura"
+let maplocalleader = ','
+" let R_openpdf=1
+let R_openhtml = 0 " See NVim-R help about getting browser to reload
+let R_applescript = 0
+let R_nvimpager = "no"
+let R_nvimpager = "vertical"
+let R_pdfviewer = "zathura"
+ 
+"" Vimtex settings
+let g:vimtex_quickfix_autoclose_after_keystrokes=5
+
+
+"" UltiSnips settings
+
+" Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<c-j>"
+let g:UltiSnipsJumpBackwardTrigger="<c-k>"
+
+" If you want :UltiSnipsEdit to split your window.
+let g:UltiSnipsEditSplit="vertical"
+
+
+"" CtrlP settings
+let g:ctrlp_brief_prompt=1
+
+let g:ctrlp_working_path_mode = 'rwa'
+let g:ctrlp_root_markers = ['.classroot']
+
+"Mappings 
+nnoremap <c-h> :CtrlP $HOME<CR>
+inoremap <c-h> <C-O>:CtrlP $HOME<CR>
+
+nnoremap <c-c> :CtrlPDir $HOME<CR>
+inoremap <c-c> <C-O>:CtrlPDir $HOME<CR>
 
 "" MODELINE
-" vim:fdm=expr:fdl=0
+" vim:fdm=expr
 " vim:fde=getline(v\:lnum)=~'^""'?'>'.(matchend(getline(v\:lnum),'"*')-1)\:'='

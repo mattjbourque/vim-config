@@ -36,7 +36,7 @@ Plugin 'freitass/todo.txt-vim'
 Plugin 'lervag/vimtex'
 
 Plugin 'SirVer/ultisnips'
-Plugin 'honza/vim-snippets'
+" Plugin 'honza/vim-snippets'
 
 " Testing a local plugin - make symbolic link in ~/.vim/bundle
 "Plugin 'vim-latex', {'pinned': 1}
@@ -427,7 +427,9 @@ let R_pdfviewer = "zathura"
 let g:vimtex_quickfix_autoclose_after_keystrokes=5
 
 
-"" UltiSnips settings
+"" UltiSnips setting
+
+let g:UltiSnipsSnippetDirectories=[$HOME.'/Dropbox/Config/UltiSnips']
 
 " Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
 let g:UltiSnipsExpandTrigger="<tab>"
@@ -436,6 +438,7 @@ let g:UltiSnipsJumpBackwardTrigger="<c-k>"
 
 " If you want :UltiSnipsEdit to split your window.
 let g:UltiSnipsEditSplit="vertical"
+
 
 
 "" CtrlP settings

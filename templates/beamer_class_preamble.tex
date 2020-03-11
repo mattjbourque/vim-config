@@ -1,7 +1,7 @@
 \documentclass[ignorenonframetext]{beamer}
 % Uncomment above for slides
 % Uncomment below for notes
-%\documentclass{article}
+%\documentclass[letterpaper]{article}
 %\usepackage[hyperref,envcountsect]{beamerarticle}
 
 \newcounter{saveenumi}
@@ -10,6 +10,9 @@
 
 \only<slides>{
   \resetcounteronoverlays{saveenumi}
+}
+\only<article>{
+  \usepackage[cm]{fullpage}
 }
 
 \setbeamertemplate{navigation symbols}{}

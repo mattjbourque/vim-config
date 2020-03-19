@@ -74,6 +74,9 @@ call vundle#end()            " required
 
 runtime ftplugin/man.vim
 
+" Don't show the gap
+set guiheadroom=0
+
 set hidden "Set buffers to hidden when abandoning them
 if exists('+modelineexpr')
 set modelineexpr " Allow expression options in modelines
@@ -158,6 +161,7 @@ set history=50		" keep 50 lines of command line history
 set ruler		" show the cursor position all the time
 set showcmd		" display incomplete commands
 set incsearch		" do incremental searching
+
 
 "" COLORS and SYNTAX HIGHLIGHTING
 " Switch syntax highlighting on, when the terminal has colors

@@ -75,6 +75,7 @@ call vundle#end()            " required
 runtime ftplugin/man.vim
 
 " Don't show the gap
+" https://wiki.archlinux.org/index.php/Vim#Empty_space_at_the_bottom_of_gVim_windows
 set guiheadroom=0
 
 set hidden "Set buffers to hidden when abandoning them

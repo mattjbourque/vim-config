@@ -25,7 +25,6 @@ Plugin 'vimoutliner/vimoutliner'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes' 
 "Plugin 'mattjbourque/airline-latex'
-Plugin 'edkolev/tmuxline.vim'
 Plugin 'jalvesaq/Nvim-R'
 Plugin 'tpope/vim-fugitive'
 Plugin 'godlygeek/tabular'
@@ -33,10 +32,11 @@ Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'altercation/vim-colors-solarized'
 Plugin 'moll/vim-bbye'
 Plugin 'freitass/todo.txt-vim'
+Plugin 'ervandew/supertab'
 
 " Testing a local plugin - make symbolic link in ~/.vim/bundle
-"Plugin 'vim-latex', {'pinned': 1}
-Plugin 'vim-latex/vim-latex'
+Plugin 'vim-latex', {'pinned': 1}
+"Plugin 'vim-latex/vim-latex'
 
 """ VUNDLE: EXAMPLE
 " The following are examples of different formats supported.
@@ -69,6 +69,8 @@ Plugin 'vim-latex/vim-latex'
 call vundle#end()            " required
 
 "" SETTINGS
+
+runtime ftplugin/man.vim
 
 set hidden "Set buffers to hidden when abandoning them
 if exists('+modelineexpr')
@@ -342,11 +344,19 @@ nnoremap <leader>bc Iscale=4; <Esc>:.!bc -l ~/.config/bc/bc_init<CR>kJA
 inoremap <leader>bc <Esc>Iscale=4; <Esc>:.!bc -l ~/.config/bc/bc_init<CR>kJA
 
 " Easy opening of standard files
+function! OpenNewIfBufferNotEmpty(filename)
+    if expand('%:p') == ''
+	exec ':edit' a:filename
+    else
+	exec ':new' a:filename
+    endif
+endfunction
+
 " TODO: don't open a new window if the current one is empty
-nnoremap <leader>ev :new $MYVIMRC<CR>
-nnoremap <leader>et :new ~/Dropbox/todo/todo.txt<CR>
-nnoremap <leader>en :new ~/Dropbox/todo/lifenotes.txt<CR>
-nnoremap <leader>exm :new ~/.xmonad/xmonad.hs<CR>
+nnoremap <leader>ev :call OpenNewIfBufferNotEmpty($MYVIMRC)<CR>
+nnoremap <leader>et :call OpenNewIfBufferNotEmpty('~/Dropbox/todo/todo.txt')<CR>
+nnoremap <leader>en :call OpenNewIfBufferNotEmpty('~/Dropbox/todo/lifenotes.txt')<CR>
+nnoremap <leader>exm :call OpenNewIfBufferNotEmpty('~/.xmonad/xmonad.hs')<CR>
 nnoremap <leader>eft :execute "new ~/.vim/ftplugin/".&filetype.".vim"<CR>
 
 nnoremap <leader>R :terminal ++close R --vanilla --quiet<CR>

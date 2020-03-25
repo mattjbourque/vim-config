@@ -1,8 +1,8 @@
 \documentclass[ignorenonframetext]{beamer}
 % Uncomment above for slides
 % Uncomment below for notes
-%\documentclass[letterpaper]{article}
-%\usepackage[hyperref,envcountsect]{beamerarticle}
+% \documentclass[12pt, letterpaper]{article}
+% \usepackage[hyperref,envcountsect]{beamerarticle}
 
 \newcounter{saveenumi}
 \newcommand{\seti}{\setcounter{saveenumi}{\value{enumi}}}
@@ -12,6 +12,7 @@
   \resetcounteronoverlays{saveenumi}
 }
 \only<article>{
+  \usepackage{mathpazo}
   \usepackage[cm]{fullpage}
 }
 
@@ -56,4 +57,3 @@
     \vfill
   \end{frame}
 }
-

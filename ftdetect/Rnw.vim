@@ -1,4 +1,0 @@
-" Vim filetype detection plugin
-" " Language:    rnoweb
-"
-autocmd BufRead,BufNewFile *.Rnw set filetype=rnoweb

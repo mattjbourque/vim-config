@@ -3,6 +3,8 @@ set sw=2
 set iskeyword+=:
 set grepprg=grep\ -nH\ $*
 
+set conceallevel=0
+
 " I think these mappings will be covered by VimTex
 " onoremap <silent> i$ :<c-u>normal! T$vt$<cr>
 " vnoremap i$ T$ot$
@@ -16,26 +18,31 @@ set grepprg=grep\ -nH\ $*
 "" ChangeAndCompile
 " Use this for making a notes version of a slides document, or a solutions
 " version of an exam document
-"
-function! ChangeAndCompile(pattern, replace, jobname)
+
+if !exists('*ChangeAndCompile')
+  function! ChangeAndCompile(pattern, replace, jobname)
     set lazyredraw
 
+    cd %:h
     let current_bufnr = bufnr()
-    let new_bufname = bufname()."-".a:jobname
-    let new_bufnr = bufadd(new_bufname)
+    let new_bufnr = bufadd(a:jobname.'.tex')
     call bufload(new_bufnr)
     let bufend = line('$')
     call appendbufline(new_bufnr, 0, getline(1, bufend))
 
     execute 'hide buffer' new_bufnr
     execute 's/'.a:pattern.'/'.a:replace
-    execute 'silent write! ' a:jobname.'.tex'
-    execute '!latexmk -pdf' a:jobname 
+    echom "writing" expand("%")  "in" getcwd()
+    silent write!
+    echom "doing latexmk in" getcwd()
+    execute 'silent !latexmk -pdf' a:jobname 
     execute 'buffer' current_bufnr
     execute 'bd!' new_bufnr
+    cd -
 
     set lazyredraw
-endfunction
+  endfunction
+endif
 
 let g:solutions_header = '\\documentclass[answers, 12pt, letterpaper]{exam}'
 let g:notes_header = '\\documentclass[12pt, letterpaper]{article} \\usepackage[hyperref, envcountsect]{beamerarticle}'
@@ -43,20 +50,21 @@ let g:notes_header = '\\documentclass[12pt, letterpaper]{article} \\usepackage[h
 nnoremap <localleader>lS :call ChangeAndCompile('\\documentclass.*{exam}', g:solutions_header, "solutions")<CR>
 nnoremap <localleader>lN :call ChangeAndCompile('\\documentclass.*{beamer}', g:notes_header, "notes")<CR>
 
-"" Vimtex settings
+"" Publish PDF
+" Depends on CopyOutput, defined in vimrc
+" Intended for publishing PDF slides and classwork to Sakai
+command! PublishPDF call CopyOutput('~/Dropbox/Teaching', '~/ExpanDrive', 'pdf')
 
 let g:vimtex_view_method='zathura'
 
 """ Logging
 let g:vimtex_quickfix_autoclose_after_keystrokes=5
-let g:vimtex_quickfix_latexlog = {
-      \ 'overfull' : 0,
-      \ 'underfull' : 0,
-      \ 'font' : 0,
-      \ 'packages' : {
-      \   'default' : 0,
-      \ },
-      \}
+
+let g:vimtex_quickfix_ignore_filters = [
+      \ 'LaTeX Font Warning',
+      \ 'Overfull \\hbox',
+      \ 'Overfull \\vbox',
+      \]
 
 """ Folding
 let g:vimtex_fold_enabled=1
@@ -65,8 +73,8 @@ let g:vimtex_fold_types = {
       \ 'comments' : {'enabled' : 1},
       \ 'preamble' : {'enabled' : 1},
       \ 'envs' : {
-      \   'blacklist' : [],
-      \   'whitelist' : ['coverpages', 'solution', 'frame'],
+      \   'blacklist' : ['solution', ],
+      \   'whitelist' : ['coverpages', 'frame',],
       \ },
       \ 'sections' : {
       \   'parse_levels' : 0,
@@ -75,6 +83,10 @@ let g:vimtex_fold_types = {
       \	   'question',
       \	   'part',
       \  ],
+      \ },
+      \ 'env_options' : {
+      \   'blacklist' : [],
+      \   'whitelist' : ['axis'],
       \ },
       \}
 
@@ -105,21 +117,21 @@ let g:vimtex_delim_toggle_mod_list = [
 
 """ Alternative latexmk settings
 let latexmk_notes = {
-        \ 'backend' : 'jobs',
-        \ 'background' : 1,
-        \ 'build_dir' : '',
-        \ 'callback' : 1,
-        \ 'continuous' : 1,
-        \ 'executable' : 'latexmk',
-        \ 'hooks' : [],
-        \ 'options' : [
-        \   '-verbose',
-        \   '-file-line-error',
-        \   '-synctex=1',
-        \   '-interaction=nonstopmode',
-	\   '-jobname=notes'
-        \ ],
-        \}
+      \ 'backend' : 'jobs',
+      \ 'background' : 1,
+      \ 'build_dir' : '',
+      \ 'callback' : 1,
+      \ 'continuous' : 1,
+      \ 'executable' : 'latexmk',
+      \ 'hooks' : [],
+      \ 'options' : [
+      \   '-verbose',
+      \   '-file-line-error',
+      \   '-synctex=1',
+      \   '-interaction=nonstopmode',
+      \   '-jobname=notes'
+      \ ],
+      \}
 
 
 

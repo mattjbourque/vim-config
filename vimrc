@@ -4,7 +4,7 @@
 set nocompatible
 
 
-"" VUNDLE SETUP
+"" PLUGINS
 filetype off                  " required
 
 " set the runtime path to include Vundle and initialize
@@ -16,26 +16,42 @@ call vundle#begin()
 """ VUNDLE: PLUGINS
 " let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
+
 Plugin 'tpope/vim-surround'
 Plugin 'tpope/vim-scriptease'
 Plugin 'tpope/vim-commentary'
 Plugin 'tpope/vim-speeddating'
 Plugin 'tpope/vim-repeat'
+
+" Wiki and outlining
 Plugin 'vimoutliner/vimoutliner'
+Plugin 'vimwiki/vimwiki'
+
+" Airline status line
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes' 
 "Plugin 'mattjbourque/airline-latex'
 Plugin 'jalvesaq/Nvim-R'
 Plugin 'tpope/vim-fugitive'
 Plugin 'godlygeek/tabular'
-Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'altercation/vim-colors-solarized'
 Plugin 'moll/vim-bbye'
-Plugin 'freitass/todo.txt-vim'
+
+" My repo for todo has a new branch to skip mappings
+Plugin 'freitass/todo.txt-vim', {'pinned': 1}
+
 Plugin 'lervag/vimtex'
 
-Plugin 'SirVer/ultisnips'
+Plugin 'vim-pandoc/vim-pandoc'
+Plugin 'vim-pandoc/vim-pandoc-syntax'
+
+" Hold for fix for syntax highlighting for mirror substitutions
+Plugin 'SirVer/ultisnips', {'pinned': 1}
 " Plugin 'honza/vim-snippets'
+
+Plugin 'ervandew/supertab'
+
+
 
 " Testing a local plugin - make symbolic link in ~/.vim/bundle
 "Plugin 'vim-latex', {'pinned': 1}
@@ -71,6 +87,8 @@ Plugin 'SirVer/ultisnips'
 call vundle#end()            " required
 
 "" SETTINGS
+
+let g:tex_flavor = "latex"
 
 runtime ftplugin/man.vim
 
@@ -121,7 +139,9 @@ set shiftwidth=4
 " by default, list mode is off
 " set listchars to display eol and tabs when :set list is used
 set nolist
-set listchars=eol:¬,tab:▸·
+set listchars=eol:¬,tab:▸·,space:·
+
+set fillchars=fold:\ 
 
 " put new splits below and to the right of current one
 "set splitbelow
@@ -138,6 +158,8 @@ set breakindent
 set showbreak=↳\ 
 set cpoptions+=n
 set breakindentopt+=sbr
+
+set fillchars=fold:\ 
 
 " system clipboard
 "set clipboard=unnamedplus
@@ -175,6 +197,14 @@ endif
 set background=dark
 colorscheme solarized
 
+command! LightScheme  set background=light
+	    \| let g:airline_solarized_bg='light'
+	    \| AirlineRefresh
+
+command! DarkScheme  set background=dark
+	    \| let g:airline_solarized_bg='dark'
+	    \| AirlineRefresh
+
 " Set up terminal colors for solarized dark theme.
 " TODO: How to set this up more flexibly for changing color on the fly from
 " light to dark?
@@ -208,8 +238,6 @@ augroup vimrcEx
     " Set 'textwidth' and tabs and such for various kinds of files
     autocmd FileType text setlocal textwidth=79
 
-    autocmd FileType markdown setlocal textwidth=79
-
     autocmd FileType tex  setlocal textwidth=0
     autocmd FileType tex  setlocal wrap
     autocmd FileType tex  setlocal breakindent
@@ -240,15 +268,8 @@ augroup vimrcEx
     autocmd filetype python setlocal shiftwidth=4
     autocmd filetype python setlocal expandtab
 
-    " When editing a file, always jump to the last known cursor position.
-    " Don't do it when the position is invalid or when inside an event handler
-    " (happens when dropping a file on gvim).
-    autocmd BufReadPost *
-		\ if line("'\"") > 0 && line("'\"") <= line("$") |
-		\   exe "normal g`\"" |
-		\ endif
-
 augroup END
+
 
 "" TEMPLATE AUTOCOMMANDS
 " TODO: figure out path specification. Currently vim only seems to match paths
@@ -338,6 +359,8 @@ augroup Templates
 augroup END
 "" MY MAPPINGS
 
+command! Mkdir !mkdir -p %:h
+
 " Basis for a mapping to use sk to upload current file
 " !sk -c %:p:h:h:t -f %:p:h:t -t % %
 " but trouble: doesn't wait for password input
@@ -361,14 +384,32 @@ endfunction
 
 " TODO: don't open a new window if the current one is empty
 nnoremap <leader>ev :call OpenNewIfBufferNotEmpty($MYVIMRC)<CR>
-nnoremap <leader>et :call OpenNewIfBufferNotEmpty('~/Dropbox/todo/todo.txt')<CR>
+nnoremap <leader>et :call OpenNewIfBufferNotEmpty('~/Dropbox/MyWiki/todo/todo.txt')<CR>
 nnoremap <leader>en :call OpenNewIfBufferNotEmpty('~/Dropbox/todo/lifenotes.txt')<CR>
+nnoremap <leader>em :call OpenNewIfBufferNotEmpty('~/Dropbox/todo/meetingnotes.txt')<CR>
 nnoremap <leader>exm :call OpenNewIfBufferNotEmpty('~/.xmonad/xmonad.hs')<CR>
-nnoremap <leader>eft :execute "new ~/.vim/ftplugin/".&filetype.".vim"<CR>
+nnoremap <leader>eft :execute "new ~/.vim/ftplugin/".split(&filetype, '\.')[0].".vim"<CR>
+nnoremap <leader>eu :UltiSnipsEdit<cr>
+nnoremap <leader>eU :vsplit ~/Dropbox/Config/UltiSnips/
+
 
 nnoremap <leader>R :terminal ++close R --vanilla --quiet<CR>
 
 command! Wd write|bdelete
+
+
+"" Function definitions
+
+function! CopyOutput(base_directory, destination_directory, extension)
+  let current_dir = getcwd()
+  exec 'cd' a:base_directory
+  echom 'Current directory: ' . getcwd()
+  echom 'running ' . 'mkdir -p ' . a:destination_directory . '/' . expand('%:h')
+  call system('mkdir -p ' . a:destination_directory . '/' . expand('%:h'))
+  echom 'running' . 'cp --parents ' . expand('%:r') . '.' . a:extension . ' ' .  a:destination_directory
+  call system('cp --parents ' . expand('%:r') . '.' . a:extension . ' ' .  a:destination_directory)
+  exec 'cd' current_dir
+endfunction
 
 
 "" AIRLINE SETTINGS
@@ -379,6 +420,8 @@ let g:airline_powerline_fonts=0
 let g:airline#extensions#tabline#enabled=1
 let g:airline#extensions#whitespace#enabled=0
 let g:airline#extensions#airlatex#enabled=0
+
+let g:airline#extensions#tabline#formatter = 'unique_tail_improved'
 
 let g:airline#extensions#branch#enabled=1
 
@@ -430,17 +473,14 @@ let g:Tex_Com_space = "\\vspace{\\stretch{<++>}}"
 
 "" NVIM-R SETTINGS
 let maplocalleader = ','
-let R_openpdf=1
+let R_openpdf=2
 let R_openhtml = 0 " See NVim-R help about getting browser to reload
 let R_applescript = 0
 let R_nvimpager = "no"
 let R_nvimpager = "vertical"
 let R_pdfviewer = "zathura"
+let R_clear_line = 1
  
-"" Vimtex settings
-let g:vimtex_quickfix_autoclose_after_keystrokes=5
-
-
 "" UltiSnips setting
 
 let g:UltiSnipsSnippetDirectories=[$HOME.'/Dropbox/Config/UltiSnips']
@@ -453,20 +493,53 @@ let g:UltiSnipsJumpBackwardTrigger="<c-k>"
 " If you want :UltiSnipsEdit to split your window.
 let g:UltiSnipsEditSplit="vertical"
 
+let g:snips_author="mattjbourque@gmail.com"
 
+"" todo.txt settings
+" don't use date mappings
+let g:todo_txt_disable_date_mappings=1
 
-"" CtrlP settings
-let g:ctrlp_brief_prompt=1
+"" SuperTab settings
+let g:SuperTabDefaultCompletionType='context'
 
-let g:ctrlp_working_path_mode = 'rwa'
-let g:ctrlp_root_markers = ['.classroot']
+"" VimWiki settings
 
-"Mappings 
-nnoremap <c-h> :CtrlP $HOME<CR>
-inoremap <c-h> <C-O>:CtrlP $HOME<CR>
+let wiki_notes = {}
+let wiki_notes.name = 'My notes wiki'
+let wiki_notes.path = '~/Dropbox/MyWiki'
+let wiki_notes.syntax = 'markdown'
+let wiki_notes.ext = '.md'
+let wiki_notes.nested_syntaxes = {'todo': 'todo'}
 
-nnoremap <c-c> :CtrlPDir $HOME<CR>
-inoremap <c-c> <C-O>:CtrlPDir $HOME<CR>
+let g:vimwiki_global_ext = 0
+
+let g:vimwiki_list = [
+	    \wiki_notes,
+	    \{'name': 'Teaching notes','path': '~/Dropbox/Teaching/wiki', 'syntax':'markdown', 'ext':'.md'},
+	    \{'name': '131math_S21_docs','path': '~/Dropbox/Teaching/131math_S21/course_docs', 'path_html': '~/ExpanDrive/131math_S21/course_docs/', 'auto_toc':1, 'auto_export':1},
+	    \{'name': '132math_S21_docs','path': '~/Dropbox/Teaching/132math_S21/course_docs', 'path_html': '~/ExpanDrive/132math_S21/course_docs/', 'auto_toc':1, 'auto_export':1},
+	    \]
+
+let g:vimwiki_key_mappings = {'table_mappings' : 0}
+
+let g:vimwiki_folding = 'custom'
+
+function! VimwikiLinkConverter(link, source_wiki_file, target_html_file)
+    if a:link =~# '^local:'
+	let link_infos = vimwiki#base#resolve_link(a:link)
+	let html_link = vimwiki#path#relpath(
+		    \ fnamemodify(a:source_wiki_file, ':h'), link_infos.filename)
+	let relative_link =
+		    \ fnamemodify(a:target_html_file, ':h') . '/' . html_link
+	call system('cp ' . fnameescape(link_infos.filename) .
+		    \ ' ' . fnameescape(relative_link))
+	return html_link
+    endif
+    return ''
+endfunction
+
+"" Pandoc settings
+let g:pandoc#command#latex_engine="pdflatex"
 
 "" MODELINE
 " vim:fdm=expr

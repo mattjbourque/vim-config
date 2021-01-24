@@ -1,62 +1,30 @@
 "  This vim-Script is used for editing mails
-"  
-"  First let's have some configuration variables:
+:b
+if !exists(g:DeleteQuotedSignature)
+    let g:DeleteQuotedSignature=1
+endif
 
-" If you want, to have the quoted Signature automatically removed, set 
-" this variable to 1
-" This function is by default bound to <leader>mdq
-let g:DeleteQuotedSignature=1
-" Or use
-" map <leader>dqs call DeleteQuotedSig<CR>
+if !exists(g:DeleteOldSubject)
+    let g:DeleteOldSubject=1
+endif
 
-" If you want to have Old Subject lines automatically removed, set the
-" following variable to 1
-" This function is by default bound to <leader>mds
-let g:DeleteOldSubject=1
+if !exists(g:CleanSubject)
+    let g:CleanSubject=1
+endif
 
-" You can clean the subject of the annoying parts "RE", "AW" or "(was: ...)"
-" automatically by setting this variable to 1.
-" The function is by default bound to <leader>mcs
-let g:CleanSubject=1
-
-" You can automatically put a Greeting string into the message by setting 
-" this variable to 1. Note you have to initialize the variables b:Signoff (for 
-" the Signoff string) and b:Name (for your name) in order to have it working.
-" Also note that there is no key mapping done for that function by default
-let g:SignOff=1
-
-" If you want to switch the topic of the mail, use the function
-" ChangeSubject() which is by default bound to <leader>mct
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" First initialize the variables
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-"if !exists(g:DeleteQuotedSignature)
-"    let s:DeleteQuotedSignature=0
-"else
-"    let s:DeleteQuotedSignature=g:DeleteQuotedSignature
-"endif
-"
-"if !exists(g:DeleteOldSubject)
-"    let s:DeleteOldSubject=0
-"else
-"    let s:DeleteOldSubject=g:DeleteOldSubject
-"endif
-"
-"if !exists(g:CleanSubject)
-"    let s:CleanSubject=0
-"else
-"    let s:CleanSubject=g:CleanSubject
-"endif
+if !exists(g:SignOff)
+    let g:SignOff=1
+endif
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Let's first start with the mappings of the functions
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-map <silent> <leader>mdq :call DeleteQuotedSig()<CR>
-map <silent> <leader>mds :call DeleteOldSubject()<CR>
-map <silent> <leader>mct :call CleanSubject2()<CR>:call ChangeSubject()<CR>
-map <silent> <leader>mcs :call CleanSubject()<CR>
+if get(g:, 'UseMailMappings',0)
+    map <silent> <leader>mdq :call DeleteQuotedSig()<CR>
+    map <silent> <leader>mds :call DeleteOldSubject()<CR>
+    map <silent> <leader>mct :call CleanSubject2()<CR>:call ChangeSubject()<CR>
+    map <silent> <leader>mcs :call CleanSubject()<CR>
+endif
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Let's first start with the mappings of the functions
@@ -78,15 +46,15 @@ function! DeleteOldSubject()"{{{
     let s:oldSearch=@/
 
     " Search for the Subject Line
-"    let @/ = "^\(Subject: \)\(Re: \|An: .*\)\((was\|r: .*)\)$"
+    "    let @/ = "^\(Subject: \)\(Re: \|An: .*\)\((was\|r: .*)\)$"
     "let @/="^\\(Subject: \\)\\(Re: \\|AW: \\)*\\([^(]*\\)\\( (wa\\%(s\\|r\\): .*)\\)$"
     "let @/="^\\(Subject: \\)\\(\\%([rR][eE]\\)\\|\\%([aA][wW]\\): \\)\\(\\%([rR][eE]\\)\\|\\%([aA][wW]\\): \\)\+\\([^(]*\\)\\( (wa\\%(s\\|r\\): .*)\\)$"
     let @/="^\\(Subject: \\)\\(.\\{-}\\) (wa\\%(s\\|r\\): .*)$"
 
     :if search(@/) != 0
-	s//\1\2\4/
+    s//\1\2\4/
     :endif
-    
+
     " restore search register
     let @/=s:oldSearch
 endfunc"}}}
@@ -142,13 +110,13 @@ function! CleanSubject()"{{{
 	if l:NewSubject !=# l:origSubj
 	    " Now insert one single Re: if we have previously removed them
 	    let l:NewSubject=substitute(l:NewSubject,"^\\(Subject: \\)","\\1Re: ","")
-"	    call setline(".",l:NewSubject)
+	    "	    call setline(".",l:NewSubject)
 	endif
 	call setline(".",l:NewSubject)
     endif
     call cursor(l:origLine,l:origCol)
 endfunc"}}}
- 
+
 " Enable Attaching of files using :Attach
 function! Attach(Filename)"{{{
     normal magg}-
@@ -166,7 +134,7 @@ function! CleanSubject2()"{{{
     call cursor(1,0)
     if search("^Subject: ") != 0
 	let l:origSubj=getline(".")
-"	let l:pattern="\\%(\\%([Rr][Ee]\\)\\|\\%([Aa][Ww]\\)\\)\\[\\=[1-9]\\=\\]\\=: \\="
+	"	let l:pattern="\\%(\\%([Rr][Ee]\\)\\|\\%([Aa][Ww]\\)\\)\\[\\=[1-9]\\=\\]\\=: \\="
 	let l:pattern="\\%(\\%([Rr][Ee]\\)\\|\\%([Aa][Ww]\\)\\|\\%([Ff][Ww]\\)\\)\\[\\=[1-9]\\=\\]\\=: \\="
 	" First Get Rid of all RE/AW
 	let l:NewSubject=substitute(l:origSubj,l:pattern,"","g")
@@ -188,8 +156,8 @@ if exists("g:DeleteOldSubject") && g:DeleteOldSubject==1
     call DeleteOldSubject()
 endif
 
-    
-    
+
+
 if exists("b:Signoff") && exists("b:Name") && exists("g:SignOff") && g:SignOff==1 
     call Signoff(b:Signoff,b:Name)
 endif

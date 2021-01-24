@@ -4,3 +4,4 @@ view/*
 *.sw[p,o]
 spell/*
 vimrc.orig
+pythonx/*

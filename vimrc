@@ -26,6 +26,7 @@ Plugin 'tpope/vim-repeat'
 " Wiki and outlining
 Plugin 'vimoutliner/vimoutliner'
 Plugin 'vimwiki/vimwiki'
+Plugin 'mattn/calendar-vim'
 
 " Airline status line
 Plugin 'vim-airline/vim-airline'

@@ -408,7 +408,7 @@ function! CopyOutput(base_directory, destination_directory, extension)
   echom 'running ' . 'mkdir -p ' . a:destination_directory . '/' . expand('%:h')
   call system('mkdir -p ' . a:destination_directory . '/' . expand('%:h'))
   echom 'running' . 'cp --parents ' . expand('%:r') . '.' . a:extension . ' ' .  a:destination_directory
-  call system('cp --parents ' . expand('%:r') . '.' . a:extension . ' ' .  a:destination_directory)
+  call system('cp --parents ' . expand('%:r') .  a:extension . ' ' .  a:destination_directory)
   exec 'cd' current_dir
 endfunction
 

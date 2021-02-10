@@ -53,7 +53,7 @@ nnoremap <localleader>lN :call ChangeAndCompile('\\documentclass.*{beamer}', g:n
 "" Publish PDF
 " Depends on CopyOutput, defined in vimrc
 " Intended for publishing PDF slides and classwork to Sakai
-command! PublishPDF call CopyOutput('~/Dropbox/Teaching', '~/ExpanDrive', 'pdf')
+command -nargs=? PublishPDF call CopyOutput('~/Dropbox/Teaching', '~/ExpanDrive', '.pdf')
 
 let g:vimtex_view_method='zathura'
 

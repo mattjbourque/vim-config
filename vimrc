@@ -46,8 +46,7 @@ Plugin 'lervag/vimtex'
 Plugin 'vim-pandoc/vim-pandoc'
 Plugin 'vim-pandoc/vim-pandoc-syntax'
 
-" Hold for fix for syntax highlighting for mirror substitutions
-Plugin 'SirVer/ultisnips', {'pinned': 1}
+Plugin 'SirVer/ultisnips'
 " Plugin 'honza/vim-snippets'
 
 Plugin 'ervandew/supertab'

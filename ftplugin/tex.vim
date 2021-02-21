@@ -55,7 +55,20 @@ nnoremap <localleader>lN :call ChangeAndCompile('\\documentclass.*{beamer}', g:n
 " Intended for publishing PDF slides and classwork to Sakai
 command -nargs=? PublishPDF call CopyOutput('~/Dropbox/Teaching', '~/ExpanDrive', '.pdf')
 
-let g:vimtex_view_method='zathura'
+"" vimTex settings
+
+""" For WSL
+
+if has('win32') || (has('unix') && exists('$WSLENV'))
+ if executable('mupdf.exe')
+   let g:vimtex_view_general_viewer = 'mupdf.exe'
+ elseif executable('/mnt/c/Users/mbourque/AppData/Local/SumatraPDF/SumatraPDF.exe')
+   let g:vimtex_view_general_viewer = '/mnt/c/Users/mbourque/AppData/Local/SumatraPDF/SumatraPDF.exe'
+ endif
+endif
+
+""" Viewer
+" let g:vimtex_view_method='zathura'
 
 """ Logging
 let g:vimtex_quickfix_autoclose_after_keystrokes=5
@@ -116,22 +129,22 @@ let g:vimtex_delim_toggle_mod_list = [
       \]
 
 """ Alternative latexmk settings
-let latexmk_notes = {
-      \ 'backend' : 'jobs',
-      \ 'background' : 1,
-      \ 'build_dir' : '',
-      \ 'callback' : 1,
-      \ 'continuous' : 1,
-      \ 'executable' : 'latexmk',
-      \ 'hooks' : [],
-      \ 'options' : [
-      \   '-verbose',
-      \   '-file-line-error',
-      \   '-synctex=1',
-      \   '-interaction=nonstopmode',
-      \   '-jobname=notes'
-      \ ],
-      \}
+" let latexmk_notes = {
+"       \ 'backend' : 'jobs',
+"       \ 'background' : 1,
+"       \ 'build_dir' : '',
+"       \ 'callback' : 1,
+"       \ 'continuous' : 1,
+"       \ 'executable' : 'latexmk',
+"       \ 'hooks' : [],
+"       \ 'options' : [
+"       \   '-verbose',
+"       \   '-file-line-error',
+"       \   '-synctex=1',
+"       \   '-interaction=nonstopmode',
+"       \   '-jobname=notes'
+"       \ ],
+"       \}
 
 
 

@@ -271,92 +271,92 @@ augroup vimrcEx
 augroup END
 
 
-"" TEMPLATE AUTOCOMMANDS
-" TODO: figure out path specification. Currently vim only seems to match paths
-" from home directory, not from, say ~/Teaching/103stat_S20/Classwork
-" Here is a hint: help says for :p filename modifier "For a filename that does
-" not exist and does not have an absolute path the result is unpredictable."
-augroup Templates
-    au!
+" "" TEMPLATE AUTOCOMMANDS
+" " TODO: figure out path specification. Currently vim only seems to match paths
+" " from home directory, not from, say ~/Teaching/103stat_S20/Classwork
+" " Here is a hint: help says for :p filename modifier "For a filename that does
+" " not exist and does not have an absolute path the result is unpredictable."
+" augroup Templates
+"     au!
 
-    autocmd BufNewFile */118math_*/Quizzes/*quiz/questions.tex 
-		\ 0r ~/.vim/templates/quiz_worksheet_preamble.tex 
-		\| $r ~/.vim/templates/quiz_header.tex
-		\| $r ~/.vim/templates/questions_wrapper.tex
-		\| set ft=tex
-		\| exe "normal gg"
+"     autocmd BufNewFile */118math_*/Quizzes/*quiz/questions.tex 
+" 		\ 0r ~/.vim/templates/quiz_worksheet_preamble.tex 
+" 		\| $r ~/.vim/templates/quiz_header.tex
+" 		\| $r ~/.vim/templates/questions_wrapper.tex
+" 		\| set ft=tex
+" 		\| exe "normal gg"
 
-    autocmd BufNewFile */118math_*/Quizzes/*practice/questions.tex 
-		\ exe "!mkdir -p %:h"
-		\| 0r ~/.vim/templates/exam_class_preamble.tex 
-		\| $r ~/.vim/templates/practice_quiz_header.tex
-		\| $r ~/.vim/templates/questions_wrapper.tex
-		\| set ft=tex
-		\| exe "normal gg"
+"     autocmd BufNewFile */118math_*/Quizzes/*practice/questions.tex 
+" 		\ exe "!mkdir -p %:h"
+" 		\| 0r ~/.vim/templates/exam_class_preamble.tex 
+" 		\| $r ~/.vim/templates/practice_quiz_header.tex
+" 		\| $r ~/.vim/templates/questions_wrapper.tex
+" 		\| set ft=tex
+" 		\| exe "normal gg"
 
-    autocmd BufNewFile */103stat_*/Quizzes/*quiz/questions.Rnw
-		\ 0r ~/.vim/templates/quiz_worksheet_preamble.tex 
-		\| $r ~/.vim/templates/knitr_setup.Rnw
-		\| $r ~/.vim/templates/quiz_header.tex
-		\| $r ~/.vim/templates/questions_wrapper.tex
-		\| set ft=rnoweb
-		\| exe "normal gg"
+"     autocmd BufNewFile */103stat_*/Quizzes/*quiz/questions.Rnw
+" 		\ 0r ~/.vim/templates/quiz_worksheet_preamble.tex 
+" 		\| $r ~/.vim/templates/knitr_setup.Rnw
+" 		\| $r ~/.vim/templates/quiz_header.tex
+" 		\| $r ~/.vim/templates/questions_wrapper.tex
+" 		\| set ft=rnoweb
+" 		\| exe "normal gg"
 
-    autocmd BufNewFile */118math_*/Exams/*exam/questions.tex
-		\ 0r ~/.vim/templates/exam_preamble.tex 
-		\| $r ~/.vim/templates/exam_coverpages.tex
-		\| $r ~/.vim/templates/questions_wrapper.tex
-		\| set ft=tex
-		\| exe "normal gg"
+"     autocmd BufNewFile */118math_*/Exams/*exam/questions.tex
+" 		\ 0r ~/.vim/templates/exam_preamble.tex 
+" 		\| $r ~/.vim/templates/exam_coverpages.tex
+" 		\| $r ~/.vim/templates/questions_wrapper.tex
+" 		\| set ft=tex
+" 		\| exe "normal gg"
 
-    autocmd BufNewFile */103stat_*/Exams/*exam/questions.Rnw
-		\ 0r ~/.vim/templates/exam_preamble.tex 
-		\| $r ~/.vim/templates/knitr_setup.Rnw
-		\| $r ~/.vim/templates/exam_coverpages.tex
-		\| $r ~/.vim/templates/questions_wrapper.tex
-		\| set ft=rnoweb
-		\| exe "normal gg"
+"     autocmd BufNewFile */103stat_*/Exams/*exam/questions.Rnw
+" 		\ 0r ~/.vim/templates/exam_preamble.tex 
+" 		\| $r ~/.vim/templates/knitr_setup.Rnw
+" 		\| $r ~/.vim/templates/exam_coverpages.tex
+" 		\| $r ~/.vim/templates/questions_wrapper.tex
+" 		\| set ft=rnoweb
+" 		\| exe "normal gg"
 
-    autocmd BufNewFile */118math_*/Quizzes/*practice/questions.tex 
-		\ 0r ~/.vim/templates/quiz_worksheet_preamble.tex 
-		\| $r ~/.vim/templates/practice_header.tex
-		\| $r ~/.vim/templates/questions_wrapper.tex
-		\| set ft=tex
-		\| exe "normal gg"
+"     autocmd BufNewFile */118math_*/Quizzes/*practice/questions.tex 
+" 		\ 0r ~/.vim/templates/quiz_worksheet_preamble.tex 
+" 		\| $r ~/.vim/templates/practice_header.tex
+" 		\| $r ~/.vim/templates/questions_wrapper.tex
+" 		\| set ft=tex
+" 		\| exe "normal gg"
 
-    autocmd BufNewFile */103stat_*/Quizzes/*practice/questions.Rnw
-		\ 0r ~/.vim/templates/quiz_worksheet_preamble.tex 
-		\| $r ~/.vim/templates/knitr_setup.Rnw
-		\| $r ~/.vim/templates/practice_header.tex
-		\| $r ~/.vim/templates/questions_wrapper.tex
-		\| set ft=rnoweb
-		\| exe "normal gg"
+"     autocmd BufNewFile */103stat_*/Quizzes/*practice/questions.Rnw
+" 		\ 0r ~/.vim/templates/quiz_worksheet_preamble.tex 
+" 		\| $r ~/.vim/templates/knitr_setup.Rnw
+" 		\| $r ~/.vim/templates/practice_header.tex
+" 		\| $r ~/.vim/templates/questions_wrapper.tex
+" 		\| set ft=rnoweb
+" 		\| exe "normal gg"
 
-    autocmd BufNewFile */103stat*/Classwork/*/questions.Rnw
-		\ 0r ~/.vim/templates/quiz_worksheet_preamble.tex 
-		\| $r ~/.vim/templates/knitr_setup.Rnw
-		\| $r ~/.vim/templates/classwork_header.tex
-		\| $r ~/.vim/templates/questions_wrapper.tex
-		\| set ft=rnoweb
-		\| exe "normal gg"
+"     autocmd BufNewFile */103stat*/Classwork/*/questions.Rnw
+" 		\ 0r ~/.vim/templates/quiz_worksheet_preamble.tex 
+" 		\| $r ~/.vim/templates/knitr_setup.Rnw
+" 		\| $r ~/.vim/templates/classwork_header.tex
+" 		\| $r ~/.vim/templates/questions_wrapper.tex
+" 		\| set ft=rnoweb
+" 		\| exe "normal gg"
 
-    autocmd BufNewFile */103stat*/Slides/*/slides.Rnw
-		\ 0r ~/.vim/templates/beamer_class_preamble.tex 
-		\| $r ~/.vim/templates/knitr_setup.Rnw
-		\| $r ~/.vim/templates/slides_body.tex
-		\| set ft=rnoweb
-		\| exe "normal gg"
+"     autocmd BufNewFile */103stat*/Slides/*/slides.Rnw
+" 		\ 0r ~/.vim/templates/beamer_class_preamble.tex 
+" 		\| $r ~/.vim/templates/knitr_setup.Rnw
+" 		\| $r ~/.vim/templates/slides_body.tex
+" 		\| set ft=rnoweb
+" 		\| exe "normal gg"
 
-    autocmd BufNewFile */103stat_*/Quizzes/*practice/questions.Rnw 
-		\ 0r ~/.vim/templates/exam_class_preamble.tex 
-		\| $r ~/.vim/templates/knitr_setup.Rnw
-		\| $r ~/.vim/templates/practice_quiz_header.tex
-		\| $r ~/.vim/templates/questions_wrapper.tex
-		\| set ft=rnoweb
-		\| exe "normal gg"
+"     autocmd BufNewFile */103stat_*/Quizzes/*practice/questions.Rnw 
+" 		\ 0r ~/.vim/templates/exam_class_preamble.tex 
+" 		\| $r ~/.vim/templates/knitr_setup.Rnw
+" 		\| $r ~/.vim/templates/practice_quiz_header.tex
+" 		\| $r ~/.vim/templates/questions_wrapper.tex
+" 		\| set ft=rnoweb
+" 		\| exe "normal gg"
 
 
-augroup END
+" augroup END
 "" MY MAPPINGS
 
 command! Mkdir !mkdir -p %:h

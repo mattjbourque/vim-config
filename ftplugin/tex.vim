@@ -73,10 +73,14 @@ endif
 """ Logging
 let g:vimtex_quickfix_autoclose_after_keystrokes=5
 
+" TODO: I usually don't care much about overfull/underfull boxes, but I might
+" want to easily change this if I were working on something where it mattered.
 let g:vimtex_quickfix_ignore_filters = [
       \ 'LaTeX Font Warning',
       \ 'Overfull \\hbox',
       \ 'Overfull \\vbox',
+      \ 'Underfull \\hbox',
+      \ 'Underfull \\vbox',
       \]
 
 """ Folding

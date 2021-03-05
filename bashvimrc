@@ -1,0 +1,8 @@
+#~/.bashvimrc
+# This file is source to bash when started from vim.
+# source the default setting rc files for bash.
+source /etc/bash.bashrc
+source ~/.bashrc
+# then, set the custom prompt for this shell.
+export PS1='\[\033[01;32m\]VIM\[\033[00m\]: \W\$ '
+# vim:ft=bash 

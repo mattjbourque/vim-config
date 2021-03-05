@@ -102,7 +102,7 @@ set modelineexpr " Allow expression options in modelines
 endif
 
 " Set the shell for commands within Vim
-set shell=/bin/bash\ --rcfile\ ~/.bashvimrc
+set shell=/bin/bash\ --rcfile\ $HOME/.vim/bashvimrc
 
 " Search in same directory as current file for tags, then work up the tree
 set tags=./tags;/

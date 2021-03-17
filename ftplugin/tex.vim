@@ -35,7 +35,7 @@ if !exists('*ChangeAndCompile')
     echom "writing" expand("%")  "in" getcwd()
     silent write!
     echom "doing latexmk in" getcwd()
-    execute 'silent !latexmk -pdf' a:jobname 
+    execute 'silent !latexmk -pdf -shell-escape' a:jobname 
     execute 'buffer' current_bufnr
     execute 'bd!' new_bufnr
     cd -
@@ -131,6 +131,16 @@ let g:vimtex_delim_toggle_mod_list = [
       \ ['\biggl', '\biggr'],
       \ ['\Biggl', '\Biggr'],
       \]
+
+let g:vimtex_compiler_latexmk = {
+      \ 'options' : [
+      \   '-verbose',
+      \   '-file-line-error',
+      \   '-synctex=1',
+      \   '-interaction=nonstopmode',
+      \   '-shell-escape',
+      \],
+      \}
 
 """ Alternative latexmk settings
 " let latexmk_notes = {

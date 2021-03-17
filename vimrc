@@ -397,6 +397,8 @@ nnoremap <leader>R :terminal ++close R --vanilla --quiet<CR>
 
 command! Wd write|bdelete
 
+" I would like to have a command for this.
+map <F6> :let $VIM_DIR=expand('%:p:h')<CR>:terminal<CR>cd $VIM_DIR<CR>
 
 "" Function definitions
 

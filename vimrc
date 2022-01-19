@@ -127,6 +127,20 @@ set wildignore+=*.log
 	    \,*.synctex.gz
 	    \,*-tikzDictionary
 
+augroup NoWildignoreInsert
+  au!
+  au InsertEnter *
+        \ if !exists('b:old_wildignore') |
+        \   let b:old_wildignore=&wildignore |
+        \   set wildignore& |
+        \ endif
+  au InsertLeave *
+        \ if exists('b:old_wildignore') |
+        \   let &wildignore=b:old_wildignore |
+        \   unlet b:old_wildignore |
+        \ endif
+augroup END
+
 " add my bibtex directory for searching for include files
 set path+=/home/matt/texmf/tex/latex/bibtex/bib
 set suffixesadd=.tex,.bib
@@ -147,8 +161,7 @@ set listchars=eol:¬,tab:▸·,space:·
 
 set fillchars=fold:\ 
 
-" put new splits below and to the right of current one
-"set splitbelow
+set splitright
 
 " always show statusline
 set laststatus=2
@@ -364,6 +377,9 @@ augroup END
 " augroup END
 "" MY MAPPINGS
 
+" From https://vim.fandom.com/wiki/Selecting_your_pasted_text
+nnoremap <expr> gp '`[' . strpart(getregtype(), 0, 1) . '`]'
+
 command! Mkdir !mkdir -p %:h
 
 " Basis for a mapping to use sk to upload current file
@@ -390,7 +406,7 @@ endfunction
 " TODO: don't open a new window if the current one is empty
 nnoremap <leader>ev :call OpenNewIfBufferNotEmpty($MYVIMRC)<CR>
 nnoremap <leader>et :call OpenNewIfBufferNotEmpty('~/Dropbox/MyWiki/todo/todo.txt')<CR>
-nnoremap <leader>en :call OpenNewIfBufferNotEmpty('~/Dropbox/todo/lifenotes.txt')<CR>
+nnoremap <leader>eQ :call OpenNewIfBufferNotEmpty('~/Dropbox/MyWiki/QuickNote.md')<CR>
 nnoremap <leader>em :call OpenNewIfBufferNotEmpty('~/Dropbox/todo/meetingnotes.txt')<CR>
 nnoremap <leader>exm :call OpenNewIfBufferNotEmpty('~/.xmonad/xmonad.hs')<CR>
 nnoremap <leader>eft :execute "new ~/.vim/ftplugin/".split(&filetype, '\.')[0].".vim"<CR>
@@ -403,7 +419,7 @@ nnoremap <leader>R :terminal ++close R --vanilla --quiet<CR>
 command! Wd write|bdelete
 
 " I would like to have a command for this.
-map <F6> :let $VIM_DIR=expand('%:p:h')<CR>:terminal<CR>cd $VIM_DIR<CR>
+map <F6> :let $VIM_DIR=expand('%:p:h')<CR>:terminal<CR> cd $VIM_DIR; clear<CR>
 
 "" Function definitions
 
@@ -417,7 +433,6 @@ function! CopyOutput(base_directory, destination_directory, extension)
   call system('cp --parents ' . expand('%:r') .  a:extension . ' ' .  a:destination_directory)
   exec 'cd' current_dir
 endfunction
-
 
 "" AIRLINE SETTINGS
 let g:airline_theme='solarized'
@@ -509,8 +524,6 @@ let g:todo_txt_disable_date_mappings=1
 "" SuperTab settings
 let g:SuperTabDefaultCompletionType='context'
 
-"" VimWiki settings
-
 let wiki_notes = {}
 let wiki_notes.name = 'My notes wiki'
 let wiki_notes.path = '~/Dropbox/MyWiki'
@@ -518,32 +531,50 @@ let wiki_notes.syntax = 'markdown'
 let wiki_notes.ext = '.md'
 let wiki_notes.nested_syntaxes = {'todo': 'todo'}
 
+"" Vimwiki settings
+
 let g:vimwiki_global_ext = 0
 
 let g:vimwiki_list = [
 	    \wiki_notes,
-	    \{'name': 'Teaching notes','path': '~/Dropbox/Teaching/wiki', 'syntax':'markdown', 'ext':'.md'},
-	    \{'name': '131math_S21_docs','path': '~/Dropbox/Teaching/131math_S21/course_docs', 'path_html': '~/ExpanDrive/131math_S21/course_docs/', 'auto_toc':1, 'auto_export':1},
-	    \{'name': '132math_S21_docs','path': '~/Dropbox/Teaching/132math_S21/course_docs', 'path_html': '~/ExpanDrive/132math_S21/course_docs/', 'auto_toc':1, 'auto_export':1},
+	    \{
+	    \ 'name': 'Teaching notes',
+	    \ 'path': '~/Dropbox/Teaching/wiki',
+	    \ 'syntax':'markdown', 'ext':'.md'
+	    \},
+	    \{
+	    \ 'name': '131math_S22_docs',
+	    \ 'path': '~/Dropbox/Teaching/131math_S22/course_docs',
+	    \ 'path_html': '~/Dropbox/Teaching/131math_S22/Sakai/course_docs',
+	    \ 'auto_toc':1,
+	    \ 'auto_export':1,
+	    \ 'syntax': 'markdown',
+	    \ 'links_space_char': '_',
+	    \ 'ext': 'md',
+	    \ 'custom_wiki2html': '~/Dropbox/Teaching/coursepages_html.sh',
+	    \ 'custom_wiki2html_args': 'https://sakai.luc.edu/dav/MATH_131_008_1539_1222'
+	    \},
+	    \{
+	    \ 'name': '118math_S22_docs',
+	    \ 'path': '~/Dropbox/Teaching/118math_S22/course_docs',
+	    \ 'path_html': '~/Dropbox/Teaching/118math_S22/Sakai/course_docs',
+	    \ 'auto_toc':1,
+	    \ 'auto_export':1,
+	    \ 'syntax': 'markdown',
+	    \ 'links_space_char': '_',
+	    \ 'ext': 'md',
+	    \ 'custom_wiki2html': '~/Dropbox/Teaching/coursepages_html.sh',
+	    \ 'custom_wiki2html_args': 'https://sakai.luc.edu/dav/MATH_118_003_1164_1222'
+	    \},
+	    \{
+	    \ 'name': 'Moving',
+	    \ 'path': '~/Dropbox/Personal/Documents/Moving_summer2021/wiki'
+	    \},
 	    \]
 
 let g:vimwiki_key_mappings = {'table_mappings' : 0}
 
 let g:vimwiki_folding = 'custom'
-
-function! VimwikiLinkConverter(link, source_wiki_file, target_html_file)
-    if a:link =~# '^local:'
-	let link_infos = vimwiki#base#resolve_link(a:link)
-	let html_link = vimwiki#path#relpath(
-		    \ fnamemodify(a:source_wiki_file, ':h'), link_infos.filename)
-	let relative_link =
-		    \ fnamemodify(a:target_html_file, ':h') . '/' . html_link
-	call system('cp ' . fnameescape(link_infos.filename) .
-		    \ ' ' . fnameescape(relative_link))
-	return html_link
-    endif
-    return ''
-endfunction
 
 "" Pandoc settings
 let g:pandoc#command#latex_engine="pdflatex"

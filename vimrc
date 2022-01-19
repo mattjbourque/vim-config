@@ -88,6 +88,10 @@ call vundle#end()            " required
 
 "" SETTINGS
 
+" Settings for mouse in windows terminal
+set mouse=a
+set ttymouse=sgr
+
 let g:tex_flavor = "latex"
 
 runtime ftplugin/man.vim

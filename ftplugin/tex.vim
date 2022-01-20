@@ -91,7 +91,7 @@ let g:vimtex_fold_types = {
       \ 'preamble' : {'enabled' : 1},
       \ 'envs' : {
       \   'blacklist' : ['solution', ],
-      \   'whitelist' : ['coverpages', 'frame',],
+      \   'whitelist' : ['coverpages', 'frame', 'questions'],
       \ },
       \ 'sections' : {
       \   'parse_levels' : 0,

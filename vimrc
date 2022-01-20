@@ -157,8 +157,7 @@ set listchars=eol:¬,tab:▸·,space:·
 
 set fillchars=fold:\ 
 
-" put new splits below and to the right of current one
-"set splitbelow
+set splitright
 
 " always show statusline
 set laststatus=2
@@ -373,6 +372,9 @@ augroup END
 " augroup END
 "" MY MAPPINGS
 
+" From https://vim.fandom.com/wiki/Selecting_your_pasted_text
+nnoremap <expr> gp '`[' . strpart(getregtype(), 0, 1) . '`]'
+
 command! Mkdir !mkdir -p %:h
 
 " Basis for a mapping to use sk to upload current file
@@ -399,7 +401,7 @@ endfunction
 " TODO: don't open a new window if the current one is empty
 nnoremap <leader>ev :call OpenNewIfBufferNotEmpty($MYVIMRC)<CR>
 nnoremap <leader>et :call OpenNewIfBufferNotEmpty('~/Dropbox/MyWiki/todo/todo.txt')<CR>
-nnoremap <leader>en :call OpenNewIfBufferNotEmpty('~/Dropbox/todo/lifenotes.txt')<CR>
+nnoremap <leader>eQ :call OpenNewIfBufferNotEmpty('~/Dropbox/MyWiki/QuickNote.md')<CR>
 nnoremap <leader>em :call OpenNewIfBufferNotEmpty('~/Dropbox/todo/meetingnotes.txt')<CR>
 nnoremap <leader>exm :call OpenNewIfBufferNotEmpty('~/.xmonad/xmonad.hs')<CR>
 nnoremap <leader>eft :execute "new ~/.vim/ftplugin/".split(&filetype, '\.')[0].".vim"<CR>
@@ -412,7 +414,7 @@ nnoremap <leader>R :terminal ++close R --vanilla --quiet<CR>
 command! Wd write|bdelete
 
 " I would like to have a command for this.
-map <F6> :let $VIM_DIR=expand('%:p:h')<CR>:terminal<CR>cd $VIM_DIR<CR>
+map <F6> :let $VIM_DIR=expand('%:p:h')<CR>:terminal<CR> cd $VIM_DIR; clear<CR>
 
 "" Function definitions
 
@@ -426,7 +428,6 @@ function! CopyOutput(base_directory, destination_directory, extension)
   call system('cp --parents ' . expand('%:r') .  a:extension . ' ' .  a:destination_directory)
   exec 'cd' current_dir
 endfunction
-
 
 "" AIRLINE SETTINGS
 let g:airline_theme='solarized'
@@ -517,8 +518,6 @@ let g:todo_txt_disable_date_mappings=1
 
 "" SuperTab settings
 let g:SuperTabDefaultCompletionType='context'
-
-"" VimWiki settings
 
 let wiki_notes = {}
 let wiki_notes.name = 'My notes wiki'

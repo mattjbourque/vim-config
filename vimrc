@@ -123,6 +123,20 @@ set wildignore+=*.log
 	    \,*.synctex.gz
 	    \,*-tikzDictionary
 
+augroup NoWildignoreInsert
+  au!
+  au InsertEnter *
+        \ if !exists('b:old_wildignore') |
+        \   let b:old_wildignore=&wildignore |
+        \   set wildignore& |
+        \ endif
+  au InsertLeave *
+        \ if exists('b:old_wildignore') |
+        \   let &wildignore=b:old_wildignore |
+        \   unlet b:old_wildignore |
+        \ endif
+augroup END
+
 " add my bibtex directory for searching for include files
 set path+=/home/matt/texmf/tex/latex/bibtex/bib
 set suffixesadd=.tex,.bib

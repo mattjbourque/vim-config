@@ -526,32 +526,50 @@ let wiki_notes.syntax = 'markdown'
 let wiki_notes.ext = '.md'
 let wiki_notes.nested_syntaxes = {'todo': 'todo'}
 
+"" Vimwiki settings
+
 let g:vimwiki_global_ext = 0
 
 let g:vimwiki_list = [
 	    \wiki_notes,
-	    \{'name': 'Teaching notes','path': '~/Dropbox/Teaching/wiki', 'syntax':'markdown', 'ext':'.md'},
-	    \{'name': '131math_S21_docs','path': '~/Dropbox/Teaching/131math_S21/course_docs', 'path_html': '~/ExpanDrive/131math_S21/course_docs/', 'auto_toc':1, 'auto_export':1},
-	    \{'name': '132math_S21_docs','path': '~/Dropbox/Teaching/132math_S21/course_docs', 'path_html': '~/ExpanDrive/132math_S21/course_docs/', 'auto_toc':1, 'auto_export':1},
+	    \{
+	    \ 'name': 'Teaching notes',
+	    \ 'path': '~/Dropbox/Teaching/wiki',
+	    \ 'syntax':'markdown', 'ext':'.md'
+	    \},
+	    \{
+	    \ 'name': '131math_S22_docs',
+	    \ 'path': '~/Dropbox/Teaching/131math_S22/course_docs',
+	    \ 'path_html': '~/Dropbox/Teaching/131math_S22/Sakai/course_docs',
+	    \ 'auto_toc':1,
+	    \ 'auto_export':1,
+	    \ 'syntax': 'markdown',
+	    \ 'links_space_char': '_',
+	    \ 'ext': 'md',
+	    \ 'custom_wiki2html': '~/Dropbox/Teaching/coursepages_html.sh',
+	    \ 'custom_wiki2html_args': 'https://sakai.luc.edu/dav/MATH_131_008_1539_1222'
+	    \},
+	    \{
+	    \ 'name': '118math_S22_docs',
+	    \ 'path': '~/Dropbox/Teaching/118math_S22/course_docs',
+	    \ 'path_html': '~/Dropbox/Teaching/118math_S22/Sakai/course_docs',
+	    \ 'auto_toc':1,
+	    \ 'auto_export':1,
+	    \ 'syntax': 'markdown',
+	    \ 'links_space_char': '_',
+	    \ 'ext': 'md',
+	    \ 'custom_wiki2html': '~/Dropbox/Teaching/coursepages_html.sh',
+	    \ 'custom_wiki2html_args': 'https://sakai.luc.edu/dav/MATH_118_003_1164_1222'
+	    \},
+	    \{
+	    \ 'name': 'Moving',
+	    \ 'path': '~/Dropbox/Personal/Documents/Moving_summer2021/wiki'
+	    \},
 	    \]
 
 let g:vimwiki_key_mappings = {'table_mappings' : 0}
 
 let g:vimwiki_folding = 'custom'
-
-function! VimwikiLinkConverter(link, source_wiki_file, target_html_file)
-    if a:link =~# '^local:'
-	let link_infos = vimwiki#base#resolve_link(a:link)
-	let html_link = vimwiki#path#relpath(
-		    \ fnamemodify(a:source_wiki_file, ':h'), link_infos.filename)
-	let relative_link =
-		    \ fnamemodify(a:target_html_file, ':h') . '/' . html_link
-	call system('cp ' . fnameescape(link_infos.filename) .
-		    \ ' ' . fnameescape(relative_link))
-	return html_link
-    endif
-    return ''
-endfunction
 
 "" Pandoc settings
 let g:pandoc#command#latex_engine="pdflatex"

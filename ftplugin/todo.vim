@@ -4,4 +4,3 @@ set nowrap
 
 nmap Oa O(A) 
 nmap oa O(A) 
-

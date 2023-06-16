@@ -21,6 +21,7 @@ set conceallevel=0
 
 if !exists('*ChangeAndCompile')
   function! ChangeAndCompile(pattern, replace, jobname)
+
     set lazyredraw
 
     cd %:h
@@ -40,7 +41,8 @@ if !exists('*ChangeAndCompile')
     execute 'bd!' new_bufnr
     cd -
 
-    set lazyredraw
+    set nolazyredraw
+    redraw!
   endfunction
 endif
 
@@ -59,16 +61,16 @@ command -nargs=? PublishPDF call CopyOutput('~/Dropbox/Teaching', '~/ExpanDrive'
 
 """ For WSL
 
-if has('win32') || (has('unix') && exists('$WSLENV'))
- if executable('mupdf.exe')
-   let g:vimtex_view_general_viewer = 'mupdf.exe'
- elseif executable('/mnt/c/Users/mbourque/AppData/Local/SumatraPDF/SumatraPDF.exe')
-   let g:vimtex_view_general_viewer = '/mnt/c/Users/mbourque/AppData/Local/SumatraPDF/SumatraPDF.exe'
- endif
-endif
+" if has('win32') || (has('unix') && exists('$WSLENV'))
+"  if executable('mupdf.exe')
+"    let g:vimtex_view_general_viewer = 'mupdf.exe'
+"  elseif executable('/mnt/c/Users/mbourque/AppData/Local/SumatraPDF/SumatraPDF.exe')
+"    let g:vimtex_view_general_viewer = '/mnt/c/Users/mbourque/AppData/Local/SumatraPDF/SumatraPDF.exe'
+"  endif
+" endif
 
 """ Viewer
-" let g:vimtex_view_method='zathura'
+let g:vimtex_view_method='zathura'
 
 """ Logging
 let g:vimtex_quickfix_autoclose_after_keystrokes=5

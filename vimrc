@@ -47,11 +47,9 @@ Plugin 'vim-pandoc/vim-pandoc'
 Plugin 'vim-pandoc/vim-pandoc-syntax'
 
 Plugin 'SirVer/ultisnips'
-" Plugin 'honza/vim-snippets'
+Plugin 'honza/vim-snippets'
 
 Plugin 'ervandew/supertab'
-
-
 
 " Testing a local plugin - make symbolic link in ~/.vim/bundle
 "Plugin 'vim-latex', {'pinned': 1}
@@ -86,7 +84,10 @@ Plugin 'ervandew/supertab'
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 
+
 "" SETTINGS
+
+set belloff=all
 
 " Settings for mouse in windows terminal
 set mouse=a
@@ -106,7 +107,7 @@ set modelineexpr " Allow expression options in modelines
 endif
 
 " Set the shell for commands within Vim
-set shell=/bin/bash\ --rcfile\ $HOME/.vim/bashvimrc
+set shell=/usr/bin/fish
 
 " Search in same directory as current file for tags, then work up the tree
 set tags=./tags;/
@@ -494,8 +495,7 @@ let g:Tex_Com_only = "\\only<<++>>{<++>}"
 let g:Tex_Com_space = "\\vspace{\\stretch{<++>}}"
 
 "" NVIM-R SETTINGS
-let maplocalleader = ','
-let R_openpdf=2
+let R_openpdf=1
 let R_openhtml = 0 " See NVim-R help about getting browser to reload
 let R_applescript = 0
 let R_nvimpager = "no"
@@ -536,39 +536,23 @@ let wiki_notes.nested_syntaxes = {'todo': 'todo'}
 let g:vimwiki_global_ext = 0
 
 let g:vimwiki_list = [
+	    \{
+	    \ 'name': '132math_Su23_docs',
+	    \ 'path': '~/Dropbox/Teaching/132math_Su23/course_docs',
+	    \ 'path_html': '~/Dropbox/Teaching/132math_Su23/Sakai/course_docs',
+	    \ 'auto_toc':1,
+	    \ 'auto_export':1,
+	    \ 'syntax': 'markdown',
+	    \ 'links_space_char': '_',
+	    \ 'ext': 'md',
+	    \ 'custom_wiki2html': '~/Dropbox/Teaching/Utilities/coursepages_html.sh',
+	    \ 'custom_wiki2html_args': 'https://sakai.luc.edu/dav/MATH_132_002_2007_1234'
+	    \},
 	    \wiki_notes,
 	    \{
 	    \ 'name': 'Teaching notes',
 	    \ 'path': '~/Dropbox/Teaching/wiki',
 	    \ 'syntax':'markdown', 'ext':'.md'
-	    \},
-	    \{
-	    \ 'name': '131math_S22_docs',
-	    \ 'path': '~/Dropbox/Teaching/131math_S22/course_docs',
-	    \ 'path_html': '~/Dropbox/Teaching/131math_S22/Sakai/course_docs',
-	    \ 'auto_toc':1,
-	    \ 'auto_export':1,
-	    \ 'syntax': 'markdown',
-	    \ 'links_space_char': '_',
-	    \ 'ext': 'md',
-	    \ 'custom_wiki2html': '~/Dropbox/Teaching/coursepages_html.sh',
-	    \ 'custom_wiki2html_args': 'https://sakai.luc.edu/dav/MATH_131_008_1539_1222'
-	    \},
-	    \{
-	    \ 'name': '118math_S22_docs',
-	    \ 'path': '~/Dropbox/Teaching/118math_S22/course_docs',
-	    \ 'path_html': '~/Dropbox/Teaching/118math_S22/Sakai/course_docs',
-	    \ 'auto_toc':1,
-	    \ 'auto_export':1,
-	    \ 'syntax': 'markdown',
-	    \ 'links_space_char': '_',
-	    \ 'ext': 'md',
-	    \ 'custom_wiki2html': '~/Dropbox/Teaching/coursepages_html.sh',
-	    \ 'custom_wiki2html_args': 'https://sakai.luc.edu/dav/MATH_118_003_1164_1222'
-	    \},
-	    \{
-	    \ 'name': 'Moving',
-	    \ 'path': '~/Dropbox/Personal/Documents/Moving_summer2021/wiki'
 	    \},
 	    \]
 

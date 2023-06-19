@@ -2,7 +2,7 @@
 set noguipty
 
 " Font choice
-set guifont=Inconsolata\ 10
+set guifont=Inconsolata\ 14
 
 " Hide the menubar and toolbar
 set guioptions -=m

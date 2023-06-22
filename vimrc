@@ -51,6 +51,8 @@ Plugin 'honza/vim-snippets'
 
 Plugin 'ervandew/supertab'
 
+Plugin 'CoderCookE/vim-chatgpt'
+
 " Testing a local plugin - make symbolic link in ~/.vim/bundle
 "Plugin 'vim-latex', {'pinned': 1}
 
@@ -570,6 +572,12 @@ let g:vimwiki_folding = 'custom'
 
 "" Pandoc settings
 let g:pandoc#command#latex_engine="pdflatex"
+
+"" ChatGPT plugin settings
+
+let g:chat_gpt_key='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'
+let g:chat_gpt_max_tokens=2000
+let g:chat_gpt_model='gpt-3.5-turbo'
 
 "" MODELINE
 " vim:fdm=expr

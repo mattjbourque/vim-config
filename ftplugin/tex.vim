@@ -134,6 +134,13 @@ let g:vimtex_delim_toggle_mod_list = [
       \ ['\Biggl', '\Biggr'],
       \]
 
+let g:vimtex_env_toggle_math_map = {
+      \ '$': '\[',
+      \ '\[': 'align*',
+      \ '$$': '\[',
+      \ '\(': '$',
+      \}
+
 let g:vimtex_compiler_latexmk = {
       \ 'options' : [
       \   '-verbose',

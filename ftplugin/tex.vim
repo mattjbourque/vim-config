@@ -31,7 +31,7 @@ if !exists('*ChangeAndCompile')
     call appendbufline(new_bufnr, 0, getline(1, bufend))
 
     execute 'hide buffer' new_bufnr
-    execute 's/'.a:pattern.'/'.a:replace
+    execute '%s/'.a:pattern.'/'.a:replace
     echom "writing" expand("%")  "in" getcwd()
     silent write!
     echom "doing latexmk in" getcwd()
@@ -40,7 +40,8 @@ if !exists('*ChangeAndCompile')
     execute 'bd!' new_bufnr
     cd -
 
-    set lazyredraw
+    set nolazyredraw
+    redraw!
   endfunction
 endif
 
@@ -59,16 +60,20 @@ command -nargs=? PublishPDF call CopyOutput('~/Dropbox/Teaching', '~/ExpanDrive'
 
 """ For WSL
 
-if has('win32') || (has('unix') && exists('$WSLENV'))
- if executable('mupdf.exe')
-   let g:vimtex_view_general_viewer = 'mupdf.exe'
- elseif executable('/mnt/c/Users/mbourque/AppData/Local/SumatraPDF/SumatraPDF.exe')
-   let g:vimtex_view_general_viewer = '/mnt/c/Users/mbourque/AppData/Local/SumatraPDF/SumatraPDF.exe'
- endif
-endif
+" if has('win32') || (has('unix') && exists('$WSLENV'))
+"  if executable('mupdf.exe')
+"    let g:vimtex_view_general_viewer = 'mupdf.exe'
+"  elseif executable('/mnt/c/Users/mbourque/AppData/Local/SumatraPDF/SumatraPDF.exe')
+"    let g:vimtex_view_general_viewer = '/mnt/c/Users/mbourque/AppData/Local/SumatraPDF/SumatraPDF.exe'
+"  endif
+" endif
 
 """ Viewer
-" let g:vimtex_view_method='zathura'
+let g:vimtex_view_method='zathura'
+
+"let g:vimtex_view_general_viewer = 'SumatraPDF'
+" let g:vimtex_view_general_options
+"       \ = '-reuse-instance -forward-search @tex @line @pdf'
 
 """ Logging
 let g:vimtex_quickfix_autoclose_after_keystrokes=5
@@ -90,8 +95,8 @@ let g:vimtex_fold_types = {
       \ 'comments' : {'enabled' : 1},
       \ 'preamble' : {'enabled' : 1},
       \ 'envs' : {
-      \   'blacklist' : ['solution', ],
-      \   'whitelist' : ['coverpages', 'frame', 'questions'],
+      \   'blacklist' : [],
+      \   'whitelist' : ['coverpages', 'frame', 'questions', 'tikzpicture',],
       \ },
       \ 'sections' : {
       \   'parse_levels' : 0,
@@ -121,6 +126,7 @@ let g:vimtex_indent_lists = [
       \ 'description',
       \ 'enumerate',
       \ 'thebibliography',
+      \ 'questions'
       \]
 
 """ Delimiters

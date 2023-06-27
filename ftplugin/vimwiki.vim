@@ -1,3 +1,4 @@
+set nowrap
 let vimwiki_header_type = '='
 setlocal foldlevel=2
 setlocal foldenable

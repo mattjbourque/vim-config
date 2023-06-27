@@ -50,10 +50,7 @@ Plugin 'honza/vim-snippets'
 
 Plugin 'ervandew/supertab'
 
-Plugin 'xolox/vim-misc'
-Plugin 'sysid/vimwiki-nirvana'
-
-
+Plugin 'CoderCookE/vim-chatgpt'
 
 " Testing a local plugin - make symbolic link in ~/.vim/bundle
 "Plugin 'vim-latex', {'pinned': 1}
@@ -88,6 +85,7 @@ Plugin 'sysid/vimwiki-nirvana'
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 
+
 "" SETTINGS
 
 set belloff=all
@@ -110,7 +108,6 @@ set modelineexpr " Allow expression options in modelines
 endif
 
 " Set the shell for commands within Vim
-" set shell=/bin/bash\ --rcfile\ $HOME/.vim/bashvimrc
 set shell=/usr/bin/fish
 
 " Search in same directory as current file for tags, then work up the tree
@@ -577,6 +574,12 @@ let g:vimwiki_folding = 'custom'
 
 "" Pandoc settings
 let g:pandoc#command#latex_engine="pdflatex"
+
+"" ChatGPT plugin settings
+
+let g:chat_gpt_key='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'
+let g:chat_gpt_max_tokens=2000
+let g:chat_gpt_model='gpt-3.5-turbo'
 
 "" MODELINE
 " vim:fdm=expr

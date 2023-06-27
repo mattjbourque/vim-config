@@ -21,6 +21,7 @@ set conceallevel=0
 
 if !exists('*ChangeAndCompile')
   function! ChangeAndCompile(pattern, replace, jobname)
+
     set lazyredraw
 
     cd %:h
@@ -70,10 +71,6 @@ command -nargs=? PublishPDF call CopyOutput('~/Dropbox/Teaching', '~/ExpanDrive'
 
 """ Viewer
 let g:vimtex_view_method='zathura'
-
-"let g:vimtex_view_general_viewer = 'SumatraPDF'
-" let g:vimtex_view_general_options
-"       \ = '-reuse-instance -forward-search @tex @line @pdf'
 
 """ Logging
 let g:vimtex_quickfix_autoclose_after_keystrokes=5
@@ -138,6 +135,13 @@ let g:vimtex_delim_toggle_mod_list = [
       \ ['\Biggl', '\Biggr'],
       \]
 
+let g:vimtex_env_toggle_math_map = {
+      \ '$': '\[',
+      \ '\[': 'align*',
+      \ '$$': '\[',
+      \ '\(': '$',
+      \}
+
 let g:vimtex_compiler_latexmk = {
       \ 'options' : [
       \   '-verbose',
@@ -166,7 +170,9 @@ let g:vimtex_compiler_latexmk = {
 "       \ ],
 "       \}
 
+"" SuperTab settings
 
+let g:SuperTabNoCompleteAfter+=['}']
 
 "" MODELINE
 " vim:fdm=expr

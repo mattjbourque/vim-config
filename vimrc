@@ -547,16 +547,28 @@ let g:vimwiki_global_ext = 0
 
 let g:vimwiki_list = [
 	    \{
-	    \ 'name': '132math_Su23_docs',
-	    \ 'path': '~/Dropbox/Teaching/132math_Su23/course_docs',
-	    \ 'path_html': '~/Dropbox/Teaching/132math_Su23/Sakai/course_docs',
+	    \ 'name': '117math_F23_docs',
+	    \ 'path': '~/Dropbox/Teaching/117math_F23/course_docs',
+	    \ 'path_html': '~/Dropbox/Teaching/117math_F23/Sakai/course_docs',
 	    \ 'auto_toc':1,
 	    \ 'auto_export':1,
 	    \ 'syntax': 'markdown',
 	    \ 'links_space_char': '_',
 	    \ 'ext': 'md',
 	    \ 'custom_wiki2html': '~/Dropbox/Teaching/Utilities/coursepages_html.sh',
-	    \ 'custom_wiki2html_args': 'https://sakai.luc.edu/dav/MATH_132_002_2007_1234'
+	    \ 'custom_wiki2html_args': 'https://sakai.luc.edu/dav/MATH_117_005_1474_1236'
+	    \},
+	    \{
+	    \ 'name': '131math_F23_docs',
+	    \ 'path': '~/Dropbox/Teaching/131math_F23/course_docs',
+	    \ 'path_html': '~/Dropbox/Teaching/131math_F23/Sakai/course_docs',
+	    \ 'auto_toc':1,
+	    \ 'auto_export':1,
+	    \ 'syntax': 'markdown',
+	    \ 'links_space_char': '_',
+	    \ 'ext': 'md',
+	    \ 'custom_wiki2html': '~/Dropbox/Teaching/Utilities/coursepages_html.sh',
+	    \ 'custom_wiki2html_args': 'https://sakai.luc.edu/dav/MATH_131_004_1184_1236'
 	    \},
 	    \wiki_notes,
 	    \{

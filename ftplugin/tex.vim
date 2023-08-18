@@ -32,7 +32,7 @@ if !exists('*ChangeAndCompile')
     call appendbufline(new_bufnr, 0, getline(1, bufend))
 
     execute 'hide buffer' new_bufnr
-    execute 's/'.a:pattern.'/'.a:replace
+    execute '%s/'.a:pattern.'/'.a:replace
     echom "writing" expand("%")  "in" getcwd()
     silent write!
     echom "doing latexmk in" getcwd()
@@ -92,8 +92,8 @@ let g:vimtex_fold_types = {
       \ 'comments' : {'enabled' : 1},
       \ 'preamble' : {'enabled' : 1},
       \ 'envs' : {
-      \   'blacklist' : ['solution', ],
-      \   'whitelist' : ['coverpages', 'frame', 'questions'],
+      \   'blacklist' : [],
+      \   'whitelist' : ['coverpages', 'frame', 'questions', 'tikzpicture',],
       \ },
       \ 'sections' : {
       \   'parse_levels' : 0,
@@ -123,6 +123,7 @@ let g:vimtex_indent_lists = [
       \ 'description',
       \ 'enumerate',
       \ 'thebibliography',
+      \ 'questions'
       \]
 
 """ Delimiters

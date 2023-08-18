@@ -24,7 +24,6 @@ Plugin 'tpope/vim-speeddating'
 Plugin 'tpope/vim-repeat'
 
 " Wiki and outlining
-Plugin 'vimoutliner/vimoutliner'
 Plugin 'vimwiki/vimwiki'
 Plugin 'mattn/calendar-vim'
 
@@ -427,8 +426,6 @@ nnoremap <leader>eU :vsplit ~/Dropbox/Config/UltiSnips/
 
 nnoremap <leader>R :terminal ++close R --vanilla --quiet<CR>
 
-command! Wd write|bdelete
-
 " I would like to have a command for this.
 map <F6> :let $VIM_DIR=expand('%:p:h')<CR>:terminal<CR> cd $VIM_DIR; clear<CR>
 
@@ -505,6 +502,7 @@ let g:Tex_Com_only = "\\only<<++>>{<++>}"
 let g:Tex_Com_space = "\\vspace{\\stretch{<++>}}"
 
 "" NVIM-R SETTINGS
+let maplocalleader = '\'
 let R_openpdf=1
 let R_openhtml = 0 " See NVim-R help about getting browser to reload
 let R_applescript = 0
@@ -542,6 +540,10 @@ let wiki_notes.ext = '.md'
 let wiki_notes.nested_syntaxes = {'todo': 'todo'}
 
 "" Vimwiki settings
+
+" let g:twvim_handlers = {
+" 	    \ 'Dropbox': {'prefix': 'local:~/Dropbox', 'replacement': 'C:/Users/mbourque/Dropbox'}
+" 	    \}
 
 let g:vimwiki_global_ext = 0
 

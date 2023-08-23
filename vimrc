@@ -213,6 +213,21 @@ if executable(s:clip)
     augroup END
 endif
 
+""" Gvim settings
+
+" Make external commands work through a pipe instead of a pseudo-tty
+set noguipty
+
+" Font choice: move to local file
+" set guifont=Inconsolata\ 14
+source $HOME/.vim/localVimrc
+
+" Hide the menubar and toolbar
+set guioptions -=m
+set guioptions -=T
+set guioptions -=r
+set guioptions -=L
+
 "" COLORS and SYNTAX HIGHLIGHTING
 " Switch syntax highlighting on, when the terminal has colors
 " Also switch on highlighting the last used search pattern.

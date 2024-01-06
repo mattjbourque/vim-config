@@ -37,8 +37,8 @@ Plugin 'godlygeek/tabular'
 Plugin 'altercation/vim-colors-solarized'
 Plugin 'moll/vim-bbye'
 
-" My repo for todo has a new branch to skip mappings
-Plugin 'freitass/todo.txt-vim', {'pinned': 1}
+" I had a repo for this, I think. Where is it?
+Plugin 'freitass/todo.txt-vim'
 
 Plugin 'lervag/vimtex'
 

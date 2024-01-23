@@ -113,6 +113,11 @@ set shell=/usr/bin/fish
 " Search in same directory as current file for tags, then work up the tree
 set tags=./tags;/
 
+" Case sensitivity in searching. Note you can use \C anywhere in the search
+" string to force case sensitive search.
+ set ignorecase
+ set smartcase
+
 " Make file completion behave like Bash: http://www.fuzz.dk/software/vim/filename_completion
 set wildmode=longest,list,full
 set wildmenu

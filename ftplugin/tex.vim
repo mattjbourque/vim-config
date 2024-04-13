@@ -83,6 +83,7 @@ let g:vimtex_quickfix_ignore_filters = [
       \ 'Overfull \\vbox',
       \ 'Underfull \\hbox',
       \ 'Underfull \\vbox',
+      \ 'Axis range for axis z is approximately empty'
       \]
 
 """ Folding

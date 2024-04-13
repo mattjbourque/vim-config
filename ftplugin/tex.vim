@@ -19,32 +19,33 @@ set conceallevel=0
 " Use this for making a notes version of a slides document, or a solutions
 " version of an exam document
 
-if !exists('*ChangeAndCompile')
-  function! ChangeAndCompile(pattern, replace, jobname)
+function ChangeAndCompile(pattern, replace, jobname)
 
-    set lazyredraw
+  " set lazyredraw
 
-    cd %:h
-    let current_bufnr = bufnr()
-    let new_bufnr = bufadd(a:jobname.'.tex')
-    call bufload(new_bufnr)
-    let bufend = line('$')
-    call appendbufline(new_bufnr, 0, getline(1, bufend))
+  cd %:h
+  let current_bufnr = bufnr()
+  let new_bufnr = bufadd(a:jobname.'.tex')
+  call bufload(new_bufnr)
+  let bufend = line('$')
+  call appendbufline(new_bufnr, 0, getline(1, bufend))
 
-    execute 'hide buffer' new_bufnr
-    execute '%s/'.a:pattern.'/'.a:replace
-    echom "writing" expand("%")  "in" getcwd()
-    silent write!
-    echom "doing latexmk in" getcwd()
-    execute 'silent !latexmk -pdf -shell-escape' a:jobname 
-    execute 'buffer' current_bufnr
-    execute 'bd!' new_bufnr
-    cd -
+  execute 'hide buffer' new_bufnr
+  execute '%s/'.a:pattern.'/'.a:replace
+  echom "writing" expand("%")  "in" getcwd()
+  silent write!
+  " echom "doing latexmk in" getcwd()
+  " execute 'silent !latexmk -pdf -shell-escape' a:jobname 
+  execute 'split' a:jobname.'.tex'
+  call vimtex#compiler#compile_ss()
+  " execute 'buffer' current_bufnr
+  " wincmd p
+  " execute 'bd!' new_bufnr
+  " cd -
 
-    set nolazyredraw
-    redraw!
-  endfunction
-endif
+  " set nolazyredraw
+  redraw!
+endfunction
 
 let g:solutions_header = '\\documentclass[answers, 12pt, letterpaper]{exam}'
 let g:notes_header = '\\documentclass[12pt, letterpaper]{article} \\usepackage[hyperref, envcountsect]{beamerarticle}'

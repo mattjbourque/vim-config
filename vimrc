@@ -50,7 +50,7 @@ Plugin 'honza/vim-snippets'
 
 Plugin 'ervandew/supertab'
 
-Plugin 'CoderCookE/vim-chatgpt'
+" Plugin 'CoderCookE/vim-chatgpt'
 
 " Testing a local plugin - make symbolic link in ~/.vim/bundle
 "Plugin 'vim-latex', {'pinned': 1}

@@ -19,39 +19,39 @@ set conceallevel=0
 " Use this for making a notes version of a slides document, or a solutions
 " version of an exam document
 
-function ChangeAndCompile(pattern, replace, jobname)
+if !exists('*ChangeAndCompile')
+    function ChangeAndCompile(pattern, replace, jobname, flags)
 
-  " set lazyredraw
+      let directory = expand("%:h")
 
-  cd %:h
-  let current_bufnr = bufnr()
-  let new_bufnr = bufadd(a:jobname.'.tex')
-  call bufload(new_bufnr)
-  let bufend = line('$')
-  call appendbufline(new_bufnr, 0, getline(1, bufend))
+      let text = getline(1, '$')
 
-  execute 'hide buffer' new_bufnr
-  execute '%s/'.a:pattern.'/'.a:replace
-  echom "writing" expand("%")  "in" getcwd()
-  silent write!
-  " echom "doing latexmk in" getcwd()
-  " execute 'silent !latexmk -pdf -shell-escape' a:jobname 
-  execute 'split' a:jobname.'.tex'
-  call vimtex#compiler#compile_ss()
-  " execute 'buffer' current_bufnr
-  " wincmd p
-  " execute 'bd!' new_bufnr
-  " cd -
+      new
+      " setline does some weird stuff with newlines, maybe I can do the substitute
+      " on each item in the list ... try map() but the next three lines work
+      " for now
 
-  " set nolazyredraw
-  redraw!
-endfunction
+      let text = join(text, "\n")
+      let text = substitute(text, a:pattern, a:replace, a:flags)
+      let text = split(text, "\n")
+
+      call setline(1, text)
+      " maybe there's a better way to load the filetype plugin?
+      " It might be that this is used for other than TeX files someday.
+      execute 'write!' directory.'/'.a:jobname
+      call vimtex#state#reload() "TODO: what if its not a TeX file?
+      set nomodifiable
+
+      call vimtex#compiler#compile_ss()
+
+    endfunction
+endif
 
 let g:solutions_header = '\\documentclass[answers, 12pt, letterpaper]{exam}'
 let g:notes_header = '\\documentclass[12pt, letterpaper]{article} \\usepackage[hyperref, envcountsect]{beamerarticle}'
 
-nnoremap <localleader>lS :call ChangeAndCompile('\\documentclass.*{exam}', g:solutions_header, "solutions")<CR>
-nnoremap <localleader>lN :call ChangeAndCompile('\\documentclass.*{beamer}', g:notes_header, "notes")<CR>
+nnoremap <localleader>lS :call ChangeAndCompile('\\documentclass.*{exam}', g:solutions_header, "solutions.tex", "")<CR>
+nnoremap <localleader>lN :call ChangeAndCompile('\\documentclass.*{beamer}', g:notes_header, "notes.tex", "")<CR>
 
 "" Publish PDF
 " Depends on CopyOutput, defined in vimrc

@@ -40,9 +40,9 @@ if !exists('*ChangeAndCompile')
       " It might be that this is used for other than TeX files someday.
       execute 'write!' directory.'/'.a:jobname
       call vimtex#state#reload() "TODO: what if its not a TeX file?
-      set nomodifiable
 
       call vimtex#compiler#compile_ss()
+
 
     endfunction
 endif

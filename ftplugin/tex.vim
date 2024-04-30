@@ -41,7 +41,14 @@ if !exists('*ChangeAndCompile')
       execute 'write!' directory.'/'.a:jobname
       call vimtex#state#reload() "TODO: what if its not a TeX file?
 
-      call vimtex#compiler#compile_ss()
+      augroup ChangeAndCompile
+	autocmd!
+	autocmd User VimtexEventInitPost  VimtexInfo
+	autocmd User VimtexEventCompileSuccess  echomsg "Change and Compile successful"
+	autocmd User VimtexEventCompileSuccess bwipeout!
+      augroup END
+
+      " call vimtex#compiler#compile_ss()
 
 
     endfunction

@@ -18,9 +18,29 @@ set conceallevel=0
 "" ChangeAndCompile
 " Use this for making a notes version of a slides document, or a solutions
 " version of an exam document
+"
+function! SuccessfulCAC()
+  echomsg "Change and compile complete!"
+  autocmd! ChangeAndCompile
+  bwipeout!
+endfunction
+
+
+function! FailedCAC()
+  echomsg "Change and compile failed!"
+  autocmd! ChangeAndCompile
+  bwipeout!
+endfunction
 
 if !exists('*ChangeAndCompile')
     function ChangeAndCompile(pattern, replace, jobname, flags)
+
+      augroup ChangeAndCompile
+	autocmd!
+	autocmd User VimtexEventCompileSuccess call SuccessfulCAC()
+	autocmd User VimtexEventCompileFailed call FailedCAC()
+      augroup END
+
 
       let directory = expand("%:h")
 
@@ -41,14 +61,7 @@ if !exists('*ChangeAndCompile')
       execute 'write!' directory.'/'.a:jobname
       call vimtex#state#reload() "TODO: what if its not a TeX file?
 
-      augroup ChangeAndCompile
-	autocmd!
-	autocmd User VimtexEventInitPost  VimtexInfo
-	autocmd User VimtexEventCompileSuccess  echomsg "Change and Compile successful"
-	autocmd User VimtexEventCompileSuccess bwipeout!
-      augroup END
-
-      " call vimtex#compiler#compile_ss()
+      VimtexCompile
 
 
     endfunction

@@ -22,7 +22,6 @@ set conceallevel=0
 if !exists('*ChangeAndCompile')
     function ChangeAndCompile(pattern, replace, jobname, flags)
 
-      let directory = expand("%:h")
 
       let text = getline(1, '$')
 
@@ -36,8 +35,6 @@ if !exists('*ChangeAndCompile')
       let text = split(text, "\n")
 
       call setline(1, text)
-      " maybe there's a better way to load the filetype plugin?
-      " It might be that this is used for other than TeX files someday.
       execute 'write!' directory.'/'.a:jobname
       call vimtex#state#reload() "TODO: what if its not a TeX file?
 

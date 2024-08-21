@@ -569,7 +569,7 @@ let g:vimwiki_global_ext = 0
 
 let g:vimwiki_list = [
 	    \{
-	    \ 'name': '118math_G24_docs',
+	    \ 'name': '118math_F24_docs',
 	    \ 'path': '~/Dropbox/Teaching/118math_F24/course_docs',
 	    \ 'path_html': '~/Dropbox/Teaching/118math_F24/Sakai/course_docs',
 	    \ 'auto_toc':1,

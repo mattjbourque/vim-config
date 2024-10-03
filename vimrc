@@ -553,6 +553,12 @@ let g:todo_txt_disable_date_mappings=1
 "" SuperTab settings
 let g:SuperTabDefaultCompletionType='context'
 
+"" Vimwiki settings
+
+" let g:twvim_handlers = {
+" 	    \ 'Dropbox': {'prefix': 'local:~/Dropbox', 'replacement': 'C:/Users/mbourque/Dropbox'}
+" 	    \}
+
 let wiki_notes = {}
 let wiki_notes.name = 'My notes wiki'
 let wiki_notes.path = '~/Dropbox/MyWiki'
@@ -560,11 +566,6 @@ let wiki_notes.syntax = 'markdown'
 let wiki_notes.ext = '.md'
 let wiki_notes.nested_syntaxes = {'todo': 'todo'}
 
-"" Vimwiki settings
-
-" let g:twvim_handlers = {
-" 	    \ 'Dropbox': {'prefix': 'local:~/Dropbox', 'replacement': 'C:/Users/mbourque/Dropbox'}
-" 	    \}
 
 let g:vimwiki_global_ext = 0
 

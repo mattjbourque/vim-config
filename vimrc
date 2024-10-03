@@ -530,6 +530,7 @@ let R_nvimpager = "no"
 let R_nvimpager = "vertical"
 let R_pdfviewer = "zathura"
 let R_clear_line = 1
+let R_latexcmd = ['latexmk', '-pdf', '-pdflatex="pdflatex %O -synctex=1 %S"']
  
 "" UltiSnips setting
 

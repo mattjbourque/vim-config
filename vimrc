@@ -233,6 +233,8 @@ set guioptions -=T
 set guioptions -=r
 set guioptions -=L
 
+set nrformats=""
+
 "" COLORS and SYNTAX HIGHLIGHTING
 " Switch syntax highlighting on, when the terminal has colors
 " Also switch on highlighting the last used search pattern.
@@ -571,28 +573,40 @@ let g:vimwiki_global_ext = 0
 
 let g:vimwiki_list = [
 	    \{
-	    \ 'name': '118math_F24_docs',
-	    \ 'path': '~/Dropbox/Teaching/118math_F24/course_docs',
-	    \ 'path_html': '~/Dropbox/Teaching/118math_F24/Sakai/course_docs',
+	    \ 'name': '110math_F25_docs',
+	    \ 'path': '~/Dropbox/Teaching/110math_F25/course_docs',
+	    \ 'path_html': '~/Dropbox/Teaching/110math_F25/Sakai/course_docs',
 	    \ 'auto_toc':1,
 	    \ 'auto_export':1,
 	    \ 'syntax': 'markdown',
 	    \ 'links_space_char': '_',
 	    \ 'ext': 'md',
 	    \ 'custom_wiki2html': '~/Dropbox/Teaching/Utilities/coursepages_html.sh',
-	    \ 'custom_wiki2html_args': 'https://sakai.luc.edu/dav/MATH_118_014_6070_1246'
+	    \ 'custom_wiki2html_args': 'https://sakai.luc.edu/dav/110math_f25_bourque'
 	    \},
 	    \{
-	    \ 'name': '103stat_F24_docs',
-	    \ 'path': '~/Dropbox/Teaching/103stat_F24/course_docs',
-	    \ 'path_html': '~/Dropbox/Teaching/103stat_F24/Sakai/course_docs',
+	    \ 'name': '130math_F25_docs',
+	    \ 'path': '~/Dropbox/Teaching/130math_F25/course_docs',
+	    \ 'path_html': '~/Dropbox/Teaching/130math_F25/Sakai/course_docs',
 	    \ 'auto_toc':1,
 	    \ 'auto_export':1,
 	    \ 'syntax': 'markdown',
 	    \ 'links_space_char': '_',
 	    \ 'ext': 'md',
 	    \ 'custom_wiki2html': '~/Dropbox/Teaching/Utilities/coursepages_html.sh',
-	    \ 'custom_wiki2html_args': 'https://sakai.luc.edu/dav/STAT_103_004_1416_1246'
+	    \ 'custom_wiki2html_args': 'https://sakai.luc.edu/dav/130math_f25_bourque'
+	    \},
+	    \{
+	    \ 'name': '131math_F25_docs',
+	    \ 'path': '~/Dropbox/Teaching/131math_F25/course_docs',
+	    \ 'path_html': '~/Dropbox/Teaching/131math_F25/Sakai/course_docs',
+	    \ 'auto_toc':1,
+	    \ 'auto_export':1,
+	    \ 'syntax': 'markdown',
+	    \ 'links_space_char': '_',
+	    \ 'ext': 'md',
+	    \ 'custom_wiki2html': '~/Dropbox/Teaching/Utilities/coursepages_html.sh',
+	    \ 'custom_wiki2html_args': 'https://sakai.luc.edu/dav/131math_f25_bourque'
 	    \},
 	    \wiki_notes,
 	    \{

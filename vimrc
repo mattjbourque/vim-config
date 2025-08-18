@@ -283,6 +283,10 @@ augroup vimrcEx
     au!
 
 
+    " Change directory to current file's directory, see 
+    " https://vim.fandom.com/wiki/Set_working_directory_to_the_current_file
+    autocmd BufFilePost * silent! lcd %:p:h
+
     " Set 'textwidth' and tabs and such for various kinds of files
     autocmd FileType text setlocal textwidth=79
 
@@ -290,6 +294,7 @@ augroup vimrcEx
     autocmd FileType tex  setlocal wrap
     autocmd FileType tex  setlocal breakindent
     autocmd FileType tex  setlocal breakindentopt=shift:5,sbr
+
     "autocmd FileType tex  setlocal showbreak=---------->
     autocmd FileType tex  setlocal lbr
     autocmd FileType tex  setlocal autoindent
@@ -571,28 +576,16 @@ let g:vimwiki_global_ext = 0
 
 let g:vimwiki_list = [
 	    \{
-	    \ 'name': '118math_F24_docs',
-	    \ 'path': '~/Dropbox/Teaching/118math_F24/course_docs',
-	    \ 'path_html': '~/Dropbox/Teaching/118math_F24/Sakai/course_docs',
+	    \ 'name': '118math_Su25_docs',
+	    \ 'path': '~/Dropbox/Teaching/118math_Su25/course_docs',
+	    \ 'path_html': '~/Dropbox/Teaching/130math_S25/Sakai/course_docs',
 	    \ 'auto_toc':1,
 	    \ 'auto_export':1,
 	    \ 'syntax': 'markdown',
 	    \ 'links_space_char': '_',
 	    \ 'ext': 'md',
 	    \ 'custom_wiki2html': '~/Dropbox/Teaching/Utilities/coursepages_html.sh',
-	    \ 'custom_wiki2html_args': 'https://sakai.luc.edu/dav/MATH_118_014_6070_1246'
-	    \},
-	    \{
-	    \ 'name': '103stat_F24_docs',
-	    \ 'path': '~/Dropbox/Teaching/103stat_F24/course_docs',
-	    \ 'path_html': '~/Dropbox/Teaching/103stat_F24/Sakai/course_docs',
-	    \ 'auto_toc':1,
-	    \ 'auto_export':1,
-	    \ 'syntax': 'markdown',
-	    \ 'links_space_char': '_',
-	    \ 'ext': 'md',
-	    \ 'custom_wiki2html': '~/Dropbox/Teaching/Utilities/coursepages_html.sh',
-	    \ 'custom_wiki2html_args': 'https://sakai.luc.edu/dav/STAT_103_004_1416_1246'
+	    \ 'custom_wiki2html_args': 'https://sakai.luc.edu/dav/118math_su25_bourque'
 	    \},
 	    \wiki_notes,
 	    \{

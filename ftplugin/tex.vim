@@ -89,8 +89,8 @@ command -nargs=? PublishPDF call CopyOutput('~/Dropbox/Teaching', '~/ExpanDrive'
 " endif
 
 """ Viewer
-let g:vimtex_view_general_viewer = '~/bin/sumatrapdf.sh&'
-let g:vimtex_view_general_options = '-reuse-instance -forward-search @tex @line @pdf'
+"let g:vimtex_view_general_viewer = 'SumatraPDF.exe'
+"let g:vimtex_view_general_options = '-reuse-instance -forward-search @tex @line @pdf'
 
 """ Logging
 let g:vimtex_quickfix_autoclose_after_keystrokes=5
@@ -103,7 +103,8 @@ let g:vimtex_quickfix_ignore_filters = [
       \ 'Overfull \\vbox',
       \ 'Underfull \\hbox',
       \ 'Underfull \\vbox',
-      \ 'Axis range for axis z is approximately empty'
+      \ 'Axis range for axis z is approximately empty',
+      \ 'Missing character:',
       \]
 
 """ Folding

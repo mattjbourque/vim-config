@@ -233,6 +233,9 @@ set guioptions -=T
 set guioptions -=r
 set guioptions -=L
 
+" Use text dialog rather than pop-up windows in Gvim
+set guioptions+=c
+
 set nrformats=""
 
 "" COLORS and SYNTAX HIGHLIGHTING

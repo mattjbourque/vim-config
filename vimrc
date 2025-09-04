@@ -581,6 +581,18 @@ let g:vimwiki_global_ext = 0
 
 let g:vimwiki_list = [
 	    \{
+	    \ 'name': '131math_F25_docs',
+	    \ 'path': '~/Dropbox/Teaching/131math_F25/course_docs',
+	    \ 'path_html': '~/Dropbox/Teaching/131math_F25/Sakai/course_docs',
+	    \ 'auto_toc':1,
+	    \ 'auto_export':1,
+	    \ 'syntax': 'markdown',
+	    \ 'links_space_char': '_',
+	    \ 'ext': 'md',
+	    \ 'custom_wiki2html': '~/Dropbox/Teaching/Utilities/coursepages_html.sh',
+	    \ 'custom_wiki2html_args': 'https://sakai.luc.edu/dav/131math_f25_bourque'
+	    \},
+	    \{
 	    \ 'name': '110math_F25_docs',
 	    \ 'path': '~/Dropbox/Teaching/110math_F25/course_docs',
 	    \ 'path_html': '~/Dropbox/Teaching/110math_F25/Sakai/course_docs',
@@ -603,18 +615,6 @@ let g:vimwiki_list = [
 	    \ 'ext': 'md',
 	    \ 'custom_wiki2html': '~/Dropbox/Teaching/Utilities/coursepages_html.sh',
 	    \ 'custom_wiki2html_args': 'https://sakai.luc.edu/dav/130math_f25_bourque'
-	    \},
-	    \{
-	    \ 'name': '131math_F25_docs',
-	    \ 'path': '~/Dropbox/Teaching/131math_F25/course_docs',
-	    \ 'path_html': '~/Dropbox/Teaching/131math_F25/Sakai/course_docs',
-	    \ 'auto_toc':1,
-	    \ 'auto_export':1,
-	    \ 'syntax': 'markdown',
-	    \ 'links_space_char': '_',
-	    \ 'ext': 'md',
-	    \ 'custom_wiki2html': '~/Dropbox/Teaching/Utilities/coursepages_html.sh',
-	    \ 'custom_wiki2html_args': 'https://sakai.luc.edu/dav/131math_f25_bourque'
 	    \},
 	    \wiki_notes,
 	    \{

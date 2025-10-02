@@ -1,3 +1,6 @@
+" Don't load pandoc list mappings which causes conflict with \ll
+let g:pandoc#keyboard#blacklist_submodule_mappings += ['lists']
+
 set nowrap
 let vimwiki_header_type = '='
 setlocal foldlevel=2

@@ -91,6 +91,7 @@ command -nargs=? PublishPDF call CopyOutput('~/Dropbox/Teaching', '~/ExpanDrive'
 """ Viewer
 "let g:vimtex_view_general_viewer = 'SumatraPDF.exe'
 "let g:vimtex_view_general_options = '-reuse-instance -forward-search @tex @line @pdf'
+let g:vimtex_view_automatic = 0
 
 """ Logging
 let g:vimtex_quickfix_autoclose_after_keystrokes=5

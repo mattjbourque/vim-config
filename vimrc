@@ -88,6 +88,8 @@ call vundle#end()            " required
 
 "" SETTINGS
 
+cd ~/Dropbox/Teaching/
+
 set belloff=all
 
 " Settings for mouse in windows terminal

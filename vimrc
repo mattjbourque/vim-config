@@ -583,42 +583,30 @@ let g:vimwiki_global_ext = 0
 
 let g:vimwiki_list = [
 	    \{
-	    \ 'name': '131math_F25_docs',
-	    \ 'path': '~/Dropbox/Teaching/131math_F25/course_docs',
-	    \ 'path_html': '~/Dropbox/Teaching/131math_F25/Sakai/course_docs',
+	    \ 'name': '103stat_S26',
+	    \ 'path': '~/Dropbox/Teaching/103stat_S26/course_docs',
+	    \ 'path_html': '~/Dropbox/Teaching/103stat_S26/.Sakai/course_docs',
 	    \ 'auto_toc':1,
 	    \ 'auto_export':1,
 	    \ 'syntax': 'markdown',
 	    \ 'links_space_char': '_',
 	    \ 'ext': 'md',
 	    \ 'custom_wiki2html': '~/Dropbox/Teaching/Utilities/coursepages_html.sh',
-	    \ 'custom_wiki2html_args': 'https://sakai.luc.edu/dav/131math_f25_bourque'
+	    \ 'custom_wiki2html_args': 'https://sakai.luc.edu/dav/103stat_s26'
 	    \},
 	    \{
-	    \ 'name': '110math_F25_docs',
-	    \ 'path': '~/Dropbox/Teaching/110math_F25/course_docs',
-	    \ 'path_html': '~/Dropbox/Teaching/110math_F25/Sakai/course_docs',
+	    \ 'name': '305stat_S26',
+	    \ 'path': '~/Dropbox/Teaching/305stat_S26/course_docs',
+	    \ 'path_html': '~/Dropbox/Teaching/305stat_S26/.Sakai/course_docs',
 	    \ 'auto_toc':1,
 	    \ 'auto_export':1,
 	    \ 'syntax': 'markdown',
 	    \ 'links_space_char': '_',
 	    \ 'ext': 'md',
 	    \ 'custom_wiki2html': '~/Dropbox/Teaching/Utilities/coursepages_html.sh',
-	    \ 'custom_wiki2html_args': 'https://sakai.luc.edu/dav/110math_f25_bourque'
+	    \ 'custom_wiki2html_args': 'https://sakai.luc.edu/dav/305stat_s26'
 	    \},
-	    \{
-	    \ 'name': '130math_F25_docs',
-	    \ 'path': '~/Dropbox/Teaching/130math_F25/course_docs',
-	    \ 'path_html': '~/Dropbox/Teaching/130math_F25/Sakai/course_docs',
-	    \ 'auto_toc':1,
-	    \ 'auto_export':1,
-	    \ 'syntax': 'markdown',
-	    \ 'links_space_char': '_',
-	    \ 'ext': 'md',
-	    \ 'custom_wiki2html': '~/Dropbox/Teaching/Utilities/coursepages_html.sh',
-	    \ 'custom_wiki2html_args': 'https://sakai.luc.edu/dav/130math_f25_bourque'
-	    \},
-	    \wiki_notes,
+	    \ wiki_notes,
 	    \{
 	    \ 'name': 'Teaching notes',
 	    \ 'path': '~/Dropbox/Teaching/wiki',

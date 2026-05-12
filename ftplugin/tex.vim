@@ -106,6 +106,7 @@ let g:vimtex_quickfix_ignore_filters = [
       \ 'Underfull \\vbox',
       \ 'Axis range for axis z is approximately empty',
       \ 'Missing character:',
+      \ 'Marginpar on page'
       \]
 
 """ Folding

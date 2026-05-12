@@ -417,12 +417,14 @@ augroup END
 
 
 " augroup END
-"" MY MAPPINGS
+"" MY MAPPINGS and COMMANDS
 
 " From https://vim.fandom.com/wiki/Selecting_your_pasted_text
 nnoremap <expr> gp '`[' . strpart(getregtype(), 0, 1) . '`]'
 
 command! Mkdir !mkdir -p %:h
+
+command Cdt cd ~/Dropbox/Teaching
 
 " Basis for a mapping to use sk to upload current file
 " !sk -c %:p:h:h:t -f %:p:h:t -t % %

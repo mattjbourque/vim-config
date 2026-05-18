@@ -417,12 +417,14 @@ augroup END
 
 
 " augroup END
-"" MY MAPPINGS
+"" MY MAPPINGS and COMMANDS
 
 " From https://vim.fandom.com/wiki/Selecting_your_pasted_text
 nnoremap <expr> gp '`[' . strpart(getregtype(), 0, 1) . '`]'
 
 command! Mkdir !mkdir -p %:h
+
+command Cdt cd ~/Dropbox/Teaching
 
 " Basis for a mapping to use sk to upload current file
 " !sk -c %:p:h:h:t -f %:p:h:t -t % %
@@ -582,6 +584,18 @@ let wiki_notes.nested_syntaxes = {'todo': 'todo'}
 let g:vimwiki_global_ext = 0
 
 let g:vimwiki_list = [
+	    \{
+	    \ 'name': '103stat_Su26',
+	    \ 'path': '~/Dropbox/Teaching/103stat_Su26/course_docs',
+	    \ 'path_html': '~/Dropbox/Teaching/103stat_Su26/.Sakai/course_docs',
+	    \ 'auto_toc':1,
+	    \ 'auto_export':1,
+	    \ 'syntax': 'markdown',
+	    \ 'links_space_char': '_',
+	    \ 'ext': 'md',
+	    \ 'custom_wiki2html': '~/Dropbox/Teaching/Utilities/coursepages_html.sh',
+	    \ 'custom_wiki2html_args': 'https://sakai.luc.edu/dav/103stat_su26_bourque'
+	    \},
 	    \{
 	    \ 'name': '103stat_S26',
 	    \ 'path': '~/Dropbox/Teaching/103stat_S26/course_docs',

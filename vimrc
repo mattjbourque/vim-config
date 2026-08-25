@@ -585,8 +585,20 @@ let g:vimwiki_global_ext = 0
 
 let g:vimwiki_list = [
 	    \{
-	    \ 'name': '103stat_Su26',
-	    \ 'path': '~/Dropbox/Teaching/103stat_Su26/course_docs',
+	    \ 'name': '118math_F26',
+	    \ 'path': '~/Dropbox/Teaching/118math_F26/course_docs',
+	    \ 'path_html': '~/Dropbox/Teaching/118math_F26/.Sakai/course_docs',
+	    \ 'auto_toc':1,
+	    \ 'auto_export':1,
+	    \ 'syntax': 'markdown',
+	    \ 'links_space_char': '_',
+	    \ 'ext': 'md',
+	    \ 'custom_wiki2html': '~/Dropbox/Teaching/Utilities/coursepages_html.sh',
+	    \ 'custom_wiki2html_args': 'https://sakai.luc.edu/dav/118math_f26_bourque'
+	    \},
+	    \{
+	    \ 'name': '335stat_F26',
+	    \ 'path': '~/Dropbox/Teaching/335stat_F26/course_docs',
 	    \ 'path_html': '~/Dropbox/Teaching/103stat_Su26/.Sakai/course_docs',
 	    \ 'auto_toc':1,
 	    \ 'auto_export':1,
@@ -594,31 +606,7 @@ let g:vimwiki_list = [
 	    \ 'links_space_char': '_',
 	    \ 'ext': 'md',
 	    \ 'custom_wiki2html': '~/Dropbox/Teaching/Utilities/coursepages_html.sh',
-	    \ 'custom_wiki2html_args': 'https://sakai.luc.edu/dav/103stat_su26_bourque'
-	    \},
-	    \{
-	    \ 'name': '103stat_S26',
-	    \ 'path': '~/Dropbox/Teaching/103stat_S26/course_docs',
-	    \ 'path_html': '~/Dropbox/Teaching/103stat_S26/.Sakai/course_docs',
-	    \ 'auto_toc':1,
-	    \ 'auto_export':1,
-	    \ 'syntax': 'markdown',
-	    \ 'links_space_char': '_',
-	    \ 'ext': 'md',
-	    \ 'custom_wiki2html': '~/Dropbox/Teaching/Utilities/coursepages_html.sh',
-	    \ 'custom_wiki2html_args': 'https://sakai.luc.edu/dav/103stat_s26'
-	    \},
-	    \{
-	    \ 'name': '305stat_S26',
-	    \ 'path': '~/Dropbox/Teaching/305stat_S26/course_docs',
-	    \ 'path_html': '~/Dropbox/Teaching/305stat_S26/.Sakai/course_docs',
-	    \ 'auto_toc':1,
-	    \ 'auto_export':1,
-	    \ 'syntax': 'markdown',
-	    \ 'links_space_char': '_',
-	    \ 'ext': 'md',
-	    \ 'custom_wiki2html': '~/Dropbox/Teaching/Utilities/coursepages_html.sh',
-	    \ 'custom_wiki2html_args': 'https://sakai.luc.edu/dav/305stat_s26'
+	    \ 'custom_wiki2html_args': 'https://sakai.luc.edu/dav/335stat_f26_bourque'
 	    \},
 	    \ wiki_notes,
 	    \{
